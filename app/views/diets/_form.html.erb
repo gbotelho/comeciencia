@@ -1,0 +1,41 @@
+<%= form_for @diet do |f| %>
+ 
+  <% if @diet.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@diet.errors.count, "error") %> prohibited
+        this diet from being saved:
+      </h2>
+      <ul>
+        <% @diet.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+ 
+  <p>
+    <%= f.label :calories %><br>
+    <%= f.text_field :calories %>
+  </p>
+
+  <p>
+    <%= f.label :carbohydrate_percentage %><br>
+    <%= f.text_field :carbohydrate_percentage %>
+  </p>
+
+   <p>
+    <%= f.label :protein_percentage %><br>
+    <%= f.text_field :protein_percentage %>
+  </p>
+
+   <p>
+    <%= f.label :fat_percentage %><br>
+    <%= f.text_field :fat_percentage %>
+  </p>
+
+  <p>
+    Passo 2 de 5 <%= f.submit "Continuar" %>
+  </p>
+ 
+<% end %>

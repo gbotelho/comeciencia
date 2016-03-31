@@ -1,0 +1,14 @@
+<h1>Listing food</h1>
+ 
+<table>
+  <tr>
+    <th>Name</th>
+  </tr>
+ 
+  <% @foods.each do |food| %>
+    <tr>
+      <td><%= food.name %></td>
+    </tr>
+  <% end %>
+</table>
+

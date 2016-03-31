@@ -1,0 +1,24 @@
+<h1>Sua Dieta</h1>
+ 
+ <% @diet.meals.each do |meal| %>
+ 	<p>Name: <%= meal.name %></p>
+ 	<p>Calories: <%= meal.calories %></p>
+ 	<p>Carb %: <%= meal.carbohydrate_percentage %></p>
+ 	<p>Protein %: <%= meal.protein_percentage %></p>
+ 	<p>Fat %: <%= meal.fat_percentage %></p>
+	<table>
+	  <tr>
+	    <th>Food Name</th>
+	    <th>Portion Size</th>
+	    <th>Calories</th>
+	  </tr>
+	 
+	  <% meal.portions.each do |portion| %>
+	    <tr>
+	      <td><%= portion.food.name %></td>
+	      <td><%= portion.size %></td>
+	      <td><%= portion.size * (portion.food.calories / portion.food.size) %></td>
+	    </tr>
+	  <% end %>
+	</table>
+<% end %>

@@ -1,0 +1,4 @@
+<%= render 'form' %>
+ 
+<p>Passo 3 de 5 <%= link_to 'Continuar', personalize_diet_path(@person.diets.first, @person) %></p>
+<p><%= link_to 'Back', list_proteins_food_path(@person) %></p>

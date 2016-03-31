@@ -1,0 +1,50 @@
+<%= form_for @person do |f| %>
+ 
+  <% if @person.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@person.errors.count, "error") %> prohibited
+        this person from being saved:
+      </h2>
+      <ul>
+        <% @person.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.fields_for :user do |user_fields| %>
+    <%= user_fields.label :email %>
+    <%= user_fields.text_field :email %>
+  <% end %>
+ 
+  <%= f.fields_for :diets, @person.diets.first do |diet_fields| %>
+    <%= diet_fields.label :goal %>
+    <%= diet_fields.text_field :goal %>
+  <% end %>
+ 
+  <p>
+    <%= f.label :height %><br>
+    <%= f.text_field :height %>
+  </p>
+
+  <p>
+    <%= f.label :weight %><br>
+    <%= f.text_field :weight %>
+  </p>
+
+   <p>
+    <%= f.label :sex %><br>
+    <%= f.text_field :sex %>
+  </p>
+
+  <p>
+    Para atingir seus objetivos você deve seguir uma dieta entre 0 e 1000 kcal/dia
+  </p>
+
+  <p>
+    Passo 1 de 5 <%= f.submit "Montar minha dieta" %>
+  </p>
+ 
+<% end %>

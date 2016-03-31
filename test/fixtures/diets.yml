@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  goal: MyString
+  calories: 1.5
+  weight_per_week: 1.5
+  protein_percentage: 1.5
+  carbohydrate_percentage: 1.5
+  fat_percentage: 1.5
+
+two:
+  goal: MyString
+  calories: 1.5
+  weight_per_week: 1.5
+  protein_percentage: 1.5
+  carbohydrate_percentage: 1.5
+  fat_percentage: 1.5

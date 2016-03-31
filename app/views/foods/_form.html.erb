@@ -1,0 +1,23 @@
+<h1>Escolha os alimentos que você gosta:</h1>
+ 
+<div id="notice">
+  <p><%= notice %></p>
+</div>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Favorite</th>
+    <th>Select</th>
+    <th>Unselect</th>
+  </tr>
+ 
+  <% @foods.each do |food| %>
+    <tr>
+      <td><%= food.name %></td>
+      <td><%= @foods_person.include?(food) %></td>
+      <td><%= link_to 'Select', select_food_path(food, @person) %></td>
+      <td><%= link_to 'Unselect', unselect_food_path(food, @person) %></td>
+    </tr>
+  <% end %>
+</table>

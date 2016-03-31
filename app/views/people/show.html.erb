@@ -1,0 +1,47 @@
+<p>
+  <strong>E=mail:</strong>
+  <%= @person.user.email %>
+</p>
+ 
+ <p>
+  <strong>Goal:</strong>
+  <%= @person.diets.first.goal %>
+</p>
+
+<p>
+  <strong>Height:</strong>
+  <%= @person.height %>
+</p>
+
+<p>
+  <strong>Weight:</strong>
+  <%= @person.weight %>
+</p>
+
+<p>
+  <strong>Sex:</strong>
+  <%= @person.sex %>
+</p>
+
+<p>
+  <strong>Calories:</strong>
+  <%= @person.diets.first.calories %>
+</p>
+
+<p>
+  <strong>Carbohydrate Percentage:</strong>
+  <%= @person.diets.first.carbohydrate_percentage %>
+</p>
+
+<p>
+  <strong>Protein Percentage:</strong>
+  <%= @person.diets.first.protein_percentage %>
+</p>
+
+<p>
+  <strong>Fat Percentage:</strong>
+  <%= @person.diets.first.fat_percentage %>
+</p>
+
+<%= link_to 'Edit', edit_person_path(@person) %> |
+<%= link_to 'Back', people_path %>
