@@ -21,17 +21,50 @@
 
   <p>
     <%= f.label :carbohydrate_percentage %><br>
-    <%= f.text_field :carbohydrate_percentage %>
+    <div class="row">
+      <div class="small-10 columns">
+        <div class="range-slider" data-slider="<%=@diet.carbohydrate_percentage%>" data-options="display_selector: #carbohydrate_percentage_input;">
+          <span class="range-slider-handle" role="slider" tabindex="0" ></span>
+          <span class="range-slider-active-segment"></span>
+          <%= f.hidden_field :carbohydrate_percentage %>
+        </div>
+      </div>
+      <div class="small-2 columns">
+        <input type="number" id="carbohydrate_percentage_input" name="carbohydrate_percentage_input" value="<%=@diet.carbohydrate_percentage%>" />
+      </div>
+    </div>
   </p>
 
-   <p>
+  <p>
     <%= f.label :protein_percentage %><br>
-    <%= f.text_field :protein_percentage %>
+    <div class="row">
+      <div class="small-10 columns">
+        <div class="range-slider" data-slider="<%=@diet.protein_percentage%>" data-options="display_selector: #protein_percentage_input;">
+          <span class="range-slider-handle" role="slider" tabindex="0" ></span>
+          <span class="range-slider-active-segment"></span>
+          <%= f.hidden_field :protein_percentage %>
+        </div>
+      </div>
+      <div class="small-2 columns">
+        <input type="number" id="protein_percentage_input" name="carbohydrate_percentage_input" value="<%=@diet.protein_percentage%>" />
+      </div>
+    </div>
   </p>
 
-   <p>
+  <p>
     <%= f.label :fat_percentage %><br>
-    <%= f.text_field :fat_percentage %>
+    <div class="row">
+      <div class="small-10 columns">
+        <div class="range-slider" data-slider="<%=@diet.fat_percentage%>" data-options="display_selector: #fat_percentage_input;">
+          <span class="range-slider-handle" role="slider" tabindex="0" ></span>
+          <span class="range-slider-active-segment"></span>
+          <%= f.hidden_field :fat_percentage %>
+        </div>
+      </div>
+      <div class="small-2 columns">
+        <input type="number" id="fat_percentage_input" name="carbohydrate_percentage_input" value="<%=@diet.fat_percentage%>" />
+      </div>
+    </div>
   </p>
 
   <p>

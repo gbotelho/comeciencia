@@ -48,20 +48,20 @@ class DietsController < ApplicationController
 		@diet.meals.clear
 
 		# Breakfast
-		@meal = Meal.new
-		@meal.name = "Breakfast"
+		@meal_breakfast = Meal.new
+		@meal_breakfast.name = "Breakfast"
 
-		@meal.calories = @diet.calories / 3
-		@calories_breakfast_carbs = @meal.calories * @diet.carbohydrate_percentage
-		@calories_breakfast_proteins = @meal.calories * @diet.protein_percentage
-		@calories_breakfast_fats = @meal.calories * @diet.fat_percentage
+		@meal_breakfast.calories = @diet.calories / 3
+		@calories_breakfast_carbs = @meal_breakfast.calories * @diet.carbohydrate_percentage / 100
+		@calories_breakfast_proteins = @meal_breakfast.calories * @diet.protein_percentage / 100
+		@calories_breakfast_fats = @meal_breakfast.calories * @diet.fat_percentage / 100
 
 		@calories_breakfast_carbs_per_food = @calories_breakfast_carbs /  @foods_breakfast_carbs.size
 		@foods_breakfast_carbs.each do |food|
 			@portion = Portion.new
 			@portion.size = @calories_breakfast_carbs_per_food * (food.size / food.calories)
 			@portion.food = food
-			@meal.portions << @portion
+			@meal_breakfast.portions << @portion
 		end
 
 		@calories_breakfast_proteins_per_food = @calories_breakfast_proteins /  @foods_breakfast_proteins.size
@@ -69,7 +69,7 @@ class DietsController < ApplicationController
 			@portion = Portion.new
 			@portion.size = @calories_breakfast_proteins_per_food * (food.size / food.calories)
 			@portion.food = food
-			@meal.portions << @portion
+			@meal_breakfast.portions << @portion
 		end
 
 
@@ -78,18 +78,107 @@ class DietsController < ApplicationController
 			@portion = Portion.new
 			@portion.size = @calories_breakfast_fats_per_food * (food.size / food.calories)
 			@portion.food = food
-			@meal.portions << @portion
+			@meal_breakfast.portions << @portion
 		end
 
-		@meal_foods = @meal.portions.map { |item| item.food }
-		@meal_carbohydrate = @meal.portions.inject(0){|sum,portion| sum + (portion.food.carbohydrate * (portion.size / portion.food.size))}
-		@meal_protein = @meal.portions.inject(0){|sum,portion| sum + (portion.food.protein * (portion.size / portion.food.size))}
-		@meal_fat = @meal.portions.inject(0){|sum,portion| sum + (portion.food.fat * (portion.size / portion.food.size))}
+		@meal_foods = @meal_breakfast.portions.map { |item| item.food }
+		@meal_carbohydrate = @meal_breakfast.portions.inject(0){|sum,portion| sum + (portion.food.carbohydrate * (portion.size / portion.food.size))}
+		@meal_protein = @meal_breakfast.portions.inject(0){|sum,portion| sum + (portion.food.protein * (portion.size / portion.food.size))}
+		@meal_fat = @meal_breakfast.portions.inject(0){|sum,portion| sum + (portion.food.fat * (portion.size / portion.food.size))}
 		@meal_size = @meal_carbohydrate + @meal_protein + @meal_fat
-		@meal.carbohydrate_percentage = @meal_carbohydrate / @meal_size
-		@meal.protein_percentage = @meal_protein / @meal_size
-		@meal.fat_percentage = @meal_fat / @meal_size
-		@diet.meals << @meal
+		@meal_breakfast.carbohydrate_percentage = @meal_carbohydrate / @meal_size * 100
+		@meal_breakfast.protein_percentage = @meal_protein / @meal_size * 100
+		@meal_breakfast.fat_percentage = @meal_fat / @meal_size * 100
+		@diet.meals << @meal_breakfast
+
+		# Lunch
+		@meal_lunch = Meal.new
+		@meal_lunch.name = "Lunch"
+
+		@meal_lunch.calories = @diet.calories * (4 / 9.0)
+		@calories_lunch_carbs = @meal_lunch.calories * @diet.carbohydrate_percentage / 100
+		@calories_lunch_proteins = @meal_lunch.calories * @diet.protein_percentage / 100
+		@calories_lunch_fats = @meal_lunch.calories * @diet.fat_percentage / 100
+
+		@calories_lunch_carbs_per_food = @calories_lunch_carbs /  @foods_lunch_carbs.size
+		@foods_lunch_carbs.each do |food|
+			@portion = Portion.new
+			@portion.size = @calories_lunch_carbs_per_food * (food.size / food.calories)
+			@portion.food = food
+			@meal_lunch.portions << @portion
+		end
+
+		@calories_lunch_proteins_per_food = @calories_lunch_proteins /  @foods_lunch_proteins.size
+		@foods_lunch_proteins.each do |food|
+			@portion = Portion.new
+			@portion.size = @calories_lunch_proteins_per_food * (food.size / food.calories)
+			@portion.food = food
+			@meal_lunch.portions << @portion
+		end
+
+
+		@calories_lunch_fats_per_food = @calories_lunch_fats /  @foods_lunch_fats.size
+		@foods_lunch_fats.each do |food|
+			@portion = Portion.new
+			@portion.size = @calories_lunch_fats_per_food * (food.size / food.calories)
+			@portion.food = food
+			@meal_lunch.portions << @portion
+		end
+
+		@meal_foods = @meal_lunch.portions.map { |item| item.food }
+		@meal_carbohydrate = @meal_lunch.portions.inject(0){|sum,portion| sum + (portion.food.carbohydrate * (portion.size / portion.food.size))}
+		@meal_protein = @meal_lunch.portions.inject(0){|sum,portion| sum + (portion.food.protein * (portion.size / portion.food.size))}
+		@meal_fat = @meal_lunch.portions.inject(0){|sum,portion| sum + (portion.food.fat * (portion.size / portion.food.size))}
+		@meal_size = @meal_carbohydrate + @meal_protein + @meal_fat
+		@meal_lunch.carbohydrate_percentage = @meal_carbohydrate / @meal_size * 100
+		@meal_lunch.protein_percentage = @meal_protein / @meal_size * 100
+		@meal_lunch.fat_percentage = @meal_fat / @meal_size * 100
+		@diet.meals << @meal_lunch
+
+
+		# Dinner
+		@meal_dinner = Meal.new
+		@meal_dinner.name = "Dinner"
+
+		@meal_dinner.calories = @diet.calories * (2 / 9.0)
+		@calories_dinner_carbs = @meal_dinner.calories * @diet.carbohydrate_percentage / 100
+		@calories_dinner_proteins = @meal_dinner.calories * @diet.protein_percentage / 100
+		@calories_dinner_fats = @meal_dinner.calories * @diet.fat_percentage / 100
+
+		@calories_dinner_carbs_per_food = @calories_dinner_carbs /  @foods_dinner_carbs.size
+		@foods_dinner_carbs.each do |food|
+			@portion = Portion.new
+			@portion.size = @calories_dinner_carbs_per_food * (food.size / food.calories)
+			@portion.food = food
+			@meal_dinner.portions << @portion
+		end
+
+		@calories_dinner_proteins_per_food = @calories_dinner_proteins /  @foods_dinner_proteins.size
+		@foods_dinner_proteins.each do |food|
+			@portion = Portion.new
+			@portion.size = @calories_dinner_proteins_per_food * (food.size / food.calories)
+			@portion.food = food
+			@meal_dinner.portions << @portion
+		end
+
+
+		@calories_dinner_fats_per_food = @calories_dinner_fats /  @foods_dinner_fats.size
+		@foods_dinner_fats.each do |food|
+			@portion = Portion.new
+			@portion.size = @calories_dinner_fats_per_food * (food.size / food.calories)
+			@portion.food = food
+			@meal_dinner.portions << @portion
+		end
+
+		@meal_foods = @meal_dinner.portions.map { |item| item.food }
+		@meal_carbohydrate = @meal_dinner.portions.inject(0){|sum,portion| sum + (portion.food.carbohydrate * (portion.size / portion.food.size))}
+		@meal_protein = @meal_dinner.portions.inject(0){|sum,portion| sum + (portion.food.protein * (portion.size / portion.food.size))}
+		@meal_fat = @meal_dinner.portions.inject(0){|sum,portion| sum + (portion.food.fat * (portion.size / portion.food.size))}
+		@meal_size = @meal_carbohydrate + @meal_protein + @meal_fat
+		@meal_dinner.carbohydrate_percentage = @meal_carbohydrate / @meal_size * 100
+		@meal_dinner.protein_percentage = @meal_protein / @meal_size * 100
+		@meal_dinner.fat_percentage = @meal_fat / @meal_size * 100
+		@diet.meals << @meal_dinner
 
 
 		render 'show'
