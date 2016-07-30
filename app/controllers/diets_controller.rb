@@ -18,6 +18,17 @@ class DietsController < ApplicationController
 	  end
 	end
 
+	def discover
+		@person = Person.find(params[:id_person])
+		@foods_person = @person.foods
+		@diets = Diet.all
+
+		intersections = @diets.map { |diet| diet.foods.size > 0 ? (diet.foods & @foods_person).size / diet.foods.size.to_f : 0} 
+		index_max = intersections.index(intersections.max)
+		@diet = @diets[index_max]
+
+	end
+	
 	def personalize
 		@person = Person.find(params[:id_person])
 		@foods_person = @person.foods
@@ -56,13 +67,22 @@ class DietsController < ApplicationController
 		@calories_breakfast_proteins = @meal_breakfast.calories * @diet.protein_percentage / 100
 		@calories_breakfast_fats = @meal_breakfast.calories * @diet.fat_percentage / 100
 
-		@calories_breakfast_carbs_per_food = @calories_breakfast_carbs /  @foods_breakfast_carbs.size
 		@foods_breakfast_carbs.each do |food|
-			@portion = Portion.new
-			@portion.size = @calories_breakfast_carbs_per_food * (food.size / food.calories)
-			@portion.food = food
-			@meal_breakfast.portions << @portion
+			if (!(@diet.meals.foods.include? food) || (@foods_breakfast_carbs.last == food))
+				@portion = Portion.new
+				@portion.size = @calories_breakfast_carbs_per_food * (food.size / food.calories)
+				@portion.food = food
+				@meal_breakfast.portions << @portion			 
+			end
 		end
+
+		# @calories_breakfast_carbs_per_food = @calories_breakfast_carbs /  @foods_breakfast_carbs.size
+		# @foods_breakfast_carbs.each do |food|
+		# 	@portion = Portion.new
+		# 	@portion.size = @calories_breakfast_carbs_per_food * (food.size / food.calories)
+		# 	@portion.food = food
+		# 	@meal_breakfast.portions << @portion
+		# end
 
 		@calories_breakfast_proteins_per_food = @calories_breakfast_proteins /  @foods_breakfast_proteins.size
 		@foods_breakfast_proteins.each do |food|

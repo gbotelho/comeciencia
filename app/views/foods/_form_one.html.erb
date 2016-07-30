@@ -1,0 +1,39 @@
+<div class="row">
+  <div class="large-12 columns">
+    <h1><center>Voce gosta desse alimento?</center></h1>
+  </div>
+</div>
+
+<% if notice != nil %>
+  <div id="notice" class="row error">
+    <div class="large-12 columns">
+      <small class="error"><center><%= notice %></center></small>
+    </div>
+  </div>
+<% end %>
+
+<div class="row">
+  <div class="large-12 columns">
+  <center>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Image</th>    
+            <th>Favorite</th>
+            <th>Select</th>
+          </tr>
+        </thead>
+         <tbody>
+            <tr>
+              <td><%= @foods_non_evaluated.first.name %></td>
+              <td><%= image_tag @foods_non_evaluated.first.image.url %></td>
+              <% @person_food = FoodsPerson.find_by_food_id_and_person_id(@foods_non_evaluated.first.id,@person.id) %>
+              <td><%= link_to (@person_food? (@person_food.like ? "Full Heart" : "Empty Heart") : "Empty Heart"), select_unselect_food_path(@foods_non_evaluated.first , @person) %></td>
+               <td><%= link_to 'Próxima', list_one_food_path(@person) %></td>
+            </tr>
+        </tbody>
+      </table>
+    </center>
+  </div>
+</div>

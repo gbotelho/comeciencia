@@ -15,7 +15,7 @@ class PeopleController < ApplicationController
   			@person.diets.new
   		end
 	end
-
+	
 	def edit
 	  @person = Person.find(params[:id])
 	end
@@ -24,7 +24,11 @@ class PeopleController < ApplicationController
 		@person = Person.new(person_params)
 
 		if @person.save
-			redirect_to edit_diet_path(@person.diets.first)
+			if params[:submit] == 'montar'
+		        redirect_to edit_diet_path(@person.diets.first)
+		    elsif params[:submit] == 'descobrir'
+		        redirect_to list_one_food_path(@person)
+		    end
 		else
 			render 'new'
 		end
@@ -49,6 +53,10 @@ class PeopleController < ApplicationController
 
     private
 	  def person_params
-	    params.require(:person).permit(:height, :weight, :sex, user_attributes: [:email], diets_attributes: [:id, :goal])
+	    params.require(:person).permit(:height, :weight, :age, :sex, user_attributes: [:email], diets_attributes: [:id, :goal])
+	  end
+
+	  def person_params_new
+	    params.require(:person).permit(:height, :weight, :age, :sex, user_attributes: [:email])
 	  end
 end

@@ -1,23 +1,40 @@
-<h1>Escolha os alimentos que você gosta:</h1>
- 
-<div id="notice">
-  <p><%= notice %></p>
+<div class="row">
+  <div class="large-12 columns">
+    <h1><center>Escolha os alimentos que você gosta:</center></h1>
+  </div>
 </div>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Favorite</th>
-    <th>Select</th>
-    <th>Unselect</th>
-  </tr>
- 
-  <% @foods.each do |food| %>
-    <tr>
-      <td><%= food.name %></td>
-      <td><%= @foods_person.include?(food) %></td>
-      <td><%= link_to 'Select', select_food_path(food, @person) %></td>
-      <td><%= link_to 'Unselect', unselect_food_path(food, @person) %></td>
-    </tr>
-  <% end %>
-</table>
+<% if notice != nil %>
+  <div id="notice" class="row error">
+    <div class="large-12 columns">
+      <small class="error"><center><%= notice %></center></small>
+    </div>
+  </div>
+<% end %>
+
+<div class="row">
+  <div class="large-12 columns">
+  <center>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Image</th>    
+            <th>Favorite</th>
+            <th>Select</th>
+          </tr>
+        </thead>
+         <tbody>
+          <% @foods.each do |food| %>
+            <tr>
+              <td><%= food.name %></td>
+              <td><%= image_tag food.image.url %></td>
+              <td><%= @foods_person.include?(food) %></td>
+              <td><%= link_to @person.foods.include?(food) ? "Unselect" : "Select", select_unselect_food_path(food, @person) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </center>
+  </div>
+</div>

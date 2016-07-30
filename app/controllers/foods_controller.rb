@@ -10,6 +10,21 @@ class FoodsController < ApplicationController
 		@foods_person = @person.foods
 	end
 
+	def list_one
+		@foods = Food.all
+		@person = Person.find(params[:id_person])
+		@foods_evaluated = @person.foods
+		@foods_non_evaluated = @foods - @foods_evaluated
+		if @foods_non_evaluated.size > 0
+			@person.foods << @foods_non_evaluated.first
+			person_food = FoodsPerson.find_by_food_id_and_person_id(@foods_non_evaluated.first.id,@person.id)
+			person_food.like = false
+			person_food.save
+		else
+			redirect_to discover_diet_path(@person)
+		end
+	end
+
 	def list_carbs
 		@foods = Food.where(:high_carbohydrate => true)
 		@person = Person.find(params[:id_person])
@@ -28,7 +43,8 @@ class FoodsController < ApplicationController
 			#{@foods_dinner_carbs.size}, #{@foods_snack_carbs.size}, #{@foods_person.size}"
 			redirect_to(:back)
 		end
-		@foods = Food.where('(protein / size) > (1.0/3)')
+		#@foods = Food.where('(protein / size) > (1.0/3)')
+		@foods = Food.where(:high_protein => true)
 	end
 
 	def list_fats
@@ -43,20 +59,23 @@ class FoodsController < ApplicationController
 			#{@foods_dinner_proteins.size}, #{@foods_snack_proteins.size}, #{@foods_person.size}"
 			redirect_to(:back)
 		end
-		@foods = Food.where('(fat / size) > (1.0/3)')
+		#@foods = Food.where('(fat / size) > (1.0/3)')
+		@foods = Food.where(:high_fat => true)
 	end
 
-	def select
+	def select_unselect
 		@food = Food.find(params[:id_food])
 		@person = Person.find(params[:id_person])
-		@person.foods << @food
-		redirect_to(:back)
-	end
-
-	def unselect
-		@food = Food.find(params[:id_food])
-		@person = Person.find(params[:id_person])
-		@person.foods.delete(@food)
+		if (@person.foods.include?(@food))
+			@person_food = FoodsPerson.find_by_food_id_and_person_id(@food.id,@person.id)
+			@person_food.like = !@person_food.like
+			@person_food.save
+		else
+			@person.foods << @food
+			@person_food = FoodsPerson.find_by_food_id_and_person_id(@food.id,@person.id)
+			@person_food.like = true
+			@person_food.save
+		end
 		redirect_to(:back)
 	end
 end

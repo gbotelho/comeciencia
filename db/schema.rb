@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160226000033) do
+ActiveRecord::Schema.define(version: 20160711012347) do
 
   create_table "articles", force: :cascade do |t|
     t.string   "title"
@@ -32,16 +32,27 @@ ActiveRecord::Schema.define(version: 20160226000033) do
 
   create_table "diets", force: :cascade do |t|
     t.integer  "person_id"
+    t.string   "name"
     t.string   "goal"
+    t.string   "description"
     t.float    "calories"
     t.float    "protein_percentage"
     t.float    "carbohydrate_percentage"
     t.float    "fat_percentage"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   add_index "diets", ["person_id"], name: "index_diets_on_person_id"
+
+  create_table "diets_foods", id: false, force: :cascade do |t|
+    t.integer "diet_id", null: false
+    t.integer "food_id", null: false
+  end
 
   create_table "diets_meals", id: false, force: :cascade do |t|
     t.integer "diet_id", null: false
@@ -62,13 +73,20 @@ ActiveRecord::Schema.define(version: 20160226000033) do
     t.boolean  "lunch"
     t.boolean  "dinner"
     t.boolean  "snack"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
-  create_table "foods_people", id: false, force: :cascade do |t|
-    t.integer "food_id",   null: false
-    t.integer "person_id", null: false
+  create_table "foods_people", force: :cascade do |t|
+    t.integer  "food_id"
+    t.integer  "person_id"
+    t.boolean  "like"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "meals", force: :cascade do |t|
@@ -91,6 +109,7 @@ ActiveRecord::Schema.define(version: 20160226000033) do
     t.string   "name"
     t.float    "height"
     t.float    "weight"
+    t.integer  "age"
     t.string   "sex"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -3,13 +3,14 @@ Rails.application.routes.draw do
   resources :people
   resources :diets
   resources :foods
-  get 'food/select/:id_food/:id_person' => 'foods#select', :as => :select_food
-  get 'food/unselect/:id_food/:id_person' => 'foods#unselect', :as => :unselect_food
+  get 'food/select_unselect/:id_food/:id_person' => 'foods#select_unselect', :as => :select_unselect_food
   get 'food/list/:id_person' => 'foods#list', :as => :list_food
+  get 'food/list_one/:id_person' => 'foods#list_one', :as => :list_one_food
   get 'food/list_carbs/:id_person' => 'foods#list_carbs', :as => :list_carbs_food
   get 'food/list_proteins/:id_person' => 'foods#list_proteins', :as => :list_proteins_food
   get 'food/list_fats/:id_person' => 'foods#list_fats', :as => :list_fats_food
   get 'diet/personalize/:id_diet/:id_person' => 'diets#personalize', :as => :personalize_diet
+  get 'diet/discover/:id_person' => 'diets#discover', :as => :discover_diet
   get 'welcome/index'
 
   # The priority is based upon order of creation: first created -> highest priority.

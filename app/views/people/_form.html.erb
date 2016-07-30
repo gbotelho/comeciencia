@@ -1,50 +1,142 @@
 <%= form_for @person do |f| %>
  
-  <% if @person.errors.any? %>
-    <div id="error_explanation">
-      <h2>
-        <%= pluralize(@person.errors.count, "error") %> prohibited
-        this person from being saved:
-      </h2>
-      <ul>
-        <% @person.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
+<!--  <div class="row">
+    <div class="large-12 columns">
+      <% if @person.errors.any? %>
+        <div id="error_explanation">
+          <h2>
+            <%= @person.errors.count %> erros precisam ser corrigidos antes de prosseguir para o próximo passo:
+          </h2>
+          <ul>
+            <% @person.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+  </div>
+</div> -->
+
+  <div class="row">
+    <div class="large-12 columns">
+      <%= f.fields_for :user do |user_fields| %>
+        <%= user_fields.label :email, "E-mail" %>
+        <%= user_fields.text_field :email , placeholder: "user@domain.com", required: true %>
+      <% end %>
+      <% if @person.user.errors.added? :email, :blank %>
+        <small class="error">E-mail não pode ser vazio.</small>
+      <% end %>
+      <% if @person.user.email? && (@person.user.errors[:email] != nil) %>
+        <small class="error">E-mail inválido ou já registrado.</small>
+      <% end %>
     </div>
-  <% end %>
-
-  <%= f.fields_for :user do |user_fields| %>
-    <%= user_fields.label :email %>
-    <%= user_fields.text_field :email %>
-  <% end %>
+  </div>
  
-  <%= f.fields_for :diets, @person.diets.first do |diet_fields| %>
-    <%= diet_fields.label :goal %>
-    <%= diet_fields.text_field :goal %>
-  <% end %>
- 
-  <p>
-    <%= f.label :height %><br>
-    <%= f.text_field :height %>
-  </p>
+  <div class="row">
+    <div class="large-12 columns">
+      <%= f.fields_for :diets, @person.diets.first do |diet_fields| %>
+        <%= diet_fields.label :goal, "Objetivo" %>
+        <%= diet_fields.select :goal, [['Emagrecer', 'lose_weight'],['Manter Peso', 'maintain_weight'],['Ganhar Massa', 'increase_weight']] %>
+      <% end %>
+      <% if @person.diets.first.errors.added? :goal %>
+        <small class="error">Objetivo inválido.</small>
+      <% end %>
+    </div>
+  </div>
 
-  <p>
-    <%= f.label :weight %><br>
-    <%= f.text_field :weight %>
-  </p>
+  <div class="row">
+    <div class="large-12 columns">
+      <div class="row collapse">
+        <%= f.label :height, "Altura" %>
+        <div class="small-9 columns">
+          <%= f.text_field :height , placeholder: "1.67", required: true  %>
+        </div>
+        <div class="small-3 columns">
+          <span class="postfix">m</span>
+        </div>
+      </div>
+      <% if @person.errors.added?(:height, :blank) %>
+        <small class="error">Altura não pode ser vazia.</small>
+      <% end %>
+      <% if @person.errors.added?(:height, :greater_than, count: 0) %>
+        <small class="error">Altura não pode ser negativa.</small>
+      <% end %>
+      <% if @person.errors.added?(:height, :less_than_or_equal_to, count: 3) %>
+        <small class="error">Altura não pode ser maior que 3.</small>
+      <% end %>
+    </div>
+  </div>
 
-   <p>
-    <%= f.label :sex %><br>
-    <%= f.text_field :sex %>
-  </p>
+  <div class="row">
+    <div class="large-12 columns">
+      <div class="row collapse">
+        <%= f.label :weight, "Peso" %>
+        <div class="small-9 columns">
+          <%= f.text_field :weight , placeholder: "68", required: true  %>
+        </div>
+        <div class="small-3 columns">
+          <span class="postfix">kg</span>
+        </div>
+      </div>
+      <% if @person.errors.added?(:weight, :blank) %>
+        <small class="error">Peso não pode ser vazio.</small>
+      <% end %>
+      <% if @person.errors.added?(:weight, :greater_than, count: 0) %>
+        <small class="error">Peso não pode ser negativo.</small>
+      <% end %>
+      <% if @person.errors.added?(:weight, :less_than_or_equal_to, count: 300) %>
+        <small class="error">Peso não pode ser maior que 300.</small>
+      <% end %>
+    </div>
+  </div>
 
-  <p>
-    Para atingir seus objetivos você deve seguir uma dieta entre 0 e 1000 kcal/dia
-  </p>
+  <div class="row">
+    <div class="large-12 columns">
+      <div class="row collapse">
+        <%= f.label :age, "Idade" %>
+        <div class="small-9 columns">
+          <%= f.text_field :age, placeholder: "30", required: true  %>
+        </div>
+        <div class="small-3 columns">
+          <span class="postfix">anos</span>
+        </div>
+      </div>
+      <% if @person.errors.added?(:age, :blank) %>
+        <small class="error">Idade não pode ser vazia.</small>
+      <% end %>
+      <% if @person.errors.added?(:age, :greater_than, count: 0) %>
+        <small class="error">Idade não pode ser negativa.</small>
+      <% end %>
+      <% if @person.errors.added?(:age, :less_than_or_equal_to, count: 150) %>
+        <small class="error">Idade não pode ser maior que 150.</small>
+      <% end %>
+    </div>
+  </div>
 
-  <p>
-    Passo 1 de 5 <%= f.submit "Montar minha dieta" %>
-  </p>
- 
+  <div class="row">
+    <div class="large-12 columns">
+      <%= f.label :sex, "Sexo" %>
+      <%= f.select :sex, [['Feminino', 'female'],['Masculino', 'male']] %>
+      <% if @person.errors.added? :sex %>
+        <small class="error">Sexo inválido.</small>
+      <% end %>
+    </div>
+  </div>
+
+<!--   <div class="row">
+    <div class="large-12 columns">
+      <h5>Para atingir seus objetivos você deve seguir uma dieta entre 0 e 1000 kcal/dia</h5>
+    </div>
+  </div> -->
+  
+  <div class="row">
+    <div class="large-12 columns">
+      <div class="clearfix">
+          <h4 class="left">Passo 1 de 2</h4>
+          <button class="small button right" name="submit" value="montar" type="submit">Montar minha dieta</button>
+          <button class="small button right secondary" name="submit" value="descobrir" type="submit">Descobrir minha dieta</button>
+      </div>
+    </div>
+  </div>
+
 <% end %>
