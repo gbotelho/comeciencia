@@ -78,4 +78,28 @@ class FoodsController < ApplicationController
 		end
 		redirect_to(:back)
 	end
+
+	def select
+		@food = Food.find(params[:id_food])
+		@person = Person.find(params[:id_person])
+		if (!@person.foods.include?(@food))
+			@person.foods << @food
+		end
+		@person_food = FoodsPerson.find_by_food_id_and_person_id(@food.id,@person.id)
+		@person_food.like = true
+		@person_food.save
+		redirect_to(:back)
+	end
+
+	def unselect
+		@food = Food.find(params[:id_food])
+		@person = Person.find(params[:id_person])
+		if (!@person.foods.include?(@food))
+			@person.foods << @food
+		end
+		@person_food = FoodsPerson.find_by_food_id_and_person_id(@food.id,@person.id)
+		@person_food.like = false
+		@person_food.save
+		redirect_to(:back)
+	end
 end

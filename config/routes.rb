@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   resources :diets
   resources :foods
   get 'food/select_unselect/:id_food/:id_person' => 'foods#select_unselect', :as => :select_unselect_food
+  get 'food/select/:id_food/:id_person' => 'foods#select', :as => :select_food
+  get 'food/unselect/:id_food/:id_person' => 'foods#unselect', :as => :unselect_food
   get 'food/list/:id_person' => 'foods#list', :as => :list_food
   get 'food/list_one/:id_person' => 'foods#list_one', :as => :list_one_food
   get 'food/list_carbs/:id_person' => 'foods#list_carbs', :as => :list_carbs_food
@@ -17,7 +19,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'welcome#index'
+  root 'people#new'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

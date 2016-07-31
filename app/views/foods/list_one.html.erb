@@ -1,9 +1,11 @@
 <%= render 'form_one' %>
 
-<div class="row">
+<div class="row marginTop50">
 	<div class="large-12 columns">
 	  <div class="clearfix">
-	      <p>Passo 2 de 2 <%= link_to 'Continuar', discover_diet_path(@person), class:"small button right" %></p>
+	  	<center>
+	      <h5><%= link_to 'Ver Resultado', discover_diet_path(@person), {class:"small button", style: "color:#FFFFFF;"} %></h5>
+	    </center>
 	  </div>
 	</div>
 </div>

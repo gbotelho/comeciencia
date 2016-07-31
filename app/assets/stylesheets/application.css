@@ -16,7 +16,69 @@
 
  */
 
+/* Change color of required labels to red */
  label.required:after {
     content: " *";
     color: red;
+}
+
+/* Change input placeolder color */
+::-webkit-input-placeholder {
+    color: #d6d6d6;
+    opacity: 1 !important; /* for chrome */
+}
+
+:-moz-placeholder { /* Firefox 18- */
+    color: #d6d6d6;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+    color: #d6d6d6;
+}
+
+:-ms-input-placeholder {  
+   color: #d6d6d6;
+}
+
+/*Change like image on hover*/
+.like {
+    display: inline-block;
+    width: 70;
+    height: 70;
+    background: url('/assets/heart-empty.png');
+}
+
+.like:hover {
+    background: url('/assets/heart-full.png');
+}
+
+/*Change cross image on hover*/
+.cross {
+    display: inline-block;
+    width: 70;
+    height: 70;
+    background: url('/assets/cross-empty.png');
+}
+
+.cross:hover {
+    background: url('/assets/cross-full.png');
+}
+
+/* Margin Top 50 */
+div.row.marginTop50 {
+  margin-top: 50px;
+}
+
+/* Margin Top 20 */
+div.row.marginTop20 {
+  margin-top: 20px;
+}
+
+.circular {
+    width:70px;
+    height: 70px;
+    border-radius: 35px;
+    -webkit-border-radius: 35;
+    -moz-border-radius: 35;
+    border: 1px solid gray;
 }

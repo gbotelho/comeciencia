@@ -1,6 +1,6 @@
 <div class="row">
   <div class="large-12 columns">
-    <h1><center>Voce gosta desse alimento?</center></h1>
+    <h3><center>Voce gosta de <%=@foods_non_evaluated.first.name%> ?</center></h3>
   </div>
 </div>
 
@@ -14,26 +14,21 @@
 
 <div class="row">
   <div class="large-12 columns">
-  <center>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Image</th>    
-            <th>Favorite</th>
-            <th>Select</th>
-          </tr>
-        </thead>
-         <tbody>
-            <tr>
-              <td><%= @foods_non_evaluated.first.name %></td>
-              <td><%= image_tag @foods_non_evaluated.first.image.url %></td>
-              <% @person_food = FoodsPerson.find_by_food_id_and_person_id(@foods_non_evaluated.first.id,@person.id) %>
-              <td><%= link_to (@person_food? (@person_food.like ? "Full Heart" : "Empty Heart") : "Empty Heart"), select_unselect_food_path(@foods_non_evaluated.first , @person) %></td>
-               <td><%= link_to 'Próxima', list_one_food_path(@person) %></td>
-            </tr>
-        </tbody>
-      </table>
+    <center>
+      <%= image_tag(@foods_non_evaluated.first.image.url,  border: 2) %>
+    </center>
+  </div>
+</div>
+
+<div class="row marginTop20">
+  <div class="large-12 columns">
+    <center>
+      <div class="small-6 columns">
+        <%= link_to image_tag("cross-empty.png", height: "70", width: "70"), list_one_food_path(@person), class:"cross right circular" %>
+      </div> 
+      <div class="small-6 columns">
+        <%= link_to image_tag("heart-empty.png", height: "70", width: "70"), select_food_path(@foods_non_evaluated.first , @person), class:"like left circular" %>
+      </div>            
     </center>
   </div>
 </div>
