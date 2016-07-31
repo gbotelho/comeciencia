@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20160711012347) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "articles", force: :cascade do |t|
     t.string   "title"
     t.text     "text"
@@ -28,7 +31,7 @@ ActiveRecord::Schema.define(version: 20160711012347) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "comments", ["article_id"], name: "index_comments_on_article_id"
+  add_index "comments", ["article_id"], name: "index_comments_on_article_id", using: :btree
 
   create_table "diets", force: :cascade do |t|
     t.integer  "person_id"
@@ -47,7 +50,7 @@ ActiveRecord::Schema.define(version: 20160711012347) do
     t.datetime "image_updated_at"
   end
 
-  add_index "diets", ["person_id"], name: "index_diets_on_person_id"
+  add_index "diets", ["person_id"], name: "index_diets_on_person_id", using: :btree
 
   create_table "diets_foods", id: false, force: :cascade do |t|
     t.integer "diet_id", null: false
@@ -122,7 +125,7 @@ ActiveRecord::Schema.define(version: 20160711012347) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "portions", ["food_id"], name: "index_portions_on_food_id"
+  add_index "portions", ["food_id"], name: "index_portions_on_food_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.integer  "person_id"
@@ -132,6 +135,7 @@ ActiveRecord::Schema.define(version: 20160711012347) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "users", ["person_id"], name: "index_users_on_person_id"
+  add_index "users", ["person_id"], name: "index_users_on_person_id", using: :btree
 
+  add_foreign_key "comments", "articles"
 end
