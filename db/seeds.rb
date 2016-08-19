@@ -129,11 +129,11 @@ feijoes = [feijao_preto]
 
 Diet.create(name: "DASH", 
 			goal: "Prevenir e tratar hipertensão",
-			description: "Chamada de DASH Diet, tem como objetivo prevenir e tratar a hipertensão. A dieta DASH foi considerada 
-				por médicos americanos como a mais adequada para beneficiar o corpo de diferentes maneiras, já que também promove 
-				perda de peso e estimula uma alimentação mais nutritiva. A ideia é simples: enfatizar nutrientes que previnem a hipertensão, 
-				como potássio, proteína, fibra e cálcio – encontrados em vegetais e alimentos integrais – e evitar aqueles que aumentam 
-				a pressão arterial, especialmente os ricos em sal, calorias e gordura, como os industrializados, doces e carne vermelha.",
+			description: "Chamada de DASH Diet, tem como objetivo prevenir e tratar a hipertensão.\n\nA dieta DASH foi considerada "\
+				"por médicos americanos como a mais adequada para beneficiar o corpo de diferentes maneiras, já que também promove "\
+				"perda de peso e estimula uma alimentação mais nutritiva.\n\nA ideia é simples: enfatizar nutrientes que previnem a hipertensão, "\
+				"como potássio, proteína, fibra e cálcio – encontrados em vegetais e alimentos integrais – e evitar aqueles que aumentam "\
+				"a pressão arterial, especialmente os ricos em sal, calorias e gordura, como os industrializados, doces e carne vermelha.",
 			image: File.new("#{Rails.root}/app/assets/images/dieta-dash.jpg")
 			).foods.push(
 			frutas,
@@ -145,11 +145,11 @@ Diet.create(name: "DASH",
 
 Diet.create(name: "MIND", 
 			goal: "Prevenir Alzheimer",
-			description: "O plano tem como objetivo prevenir o Alzheimer com alimentos benéficos para o cérebro. A dieta MIND 
-				(sigla de Mediterranean-DASH Intervention for Neurodegenerative Delay, em tradução livre, foi desenvolvida a partir 
-				da união entre o regime DASH e a mediterrânea. Sendo assim, o programa prioriza o consumo de 10 alimentos presentes 
-				nas duas dietas, que são benéficos para a saúde cerebral: folhas verdes, vegetais, nozes, frutas, grãos, cereais integrais, 
-				peixe, aves, azeite e vinho.",
+			description: "O plano tem como objetivo prevenir o Alzheimer com alimentos benéficos para o cérebro.\n\nA dieta MIND "\
+				"(sigla de Mediterranean-DASH Intervention for Neurodegenerative Delay, em tradução livre, foi desenvolvida a partir "\
+				"da união entre o regime DASH e a mediterrânea. Sendo assim, o programa prioriza o consumo de 10 alimentos presentes "\
+				"nas duas dietas, que são benéficos para a saúde cerebral: folhas verdes, vegetais, nozes, frutas, grãos, cereais integrais, "\
+				"peixe, aves, azeite e vinho.",
 			image: File.new("#{Rails.root}/app/assets/images/dieta-mind.jpg")
 			).foods.push(
 			folhas_verdes,
@@ -166,12 +166,12 @@ Diet.create(name: "MIND",
 
 Diet.create(name: "TLC", 
 			goal: "Diminuir o colesterol ruim (LDL)",
-			description: "Conhecido como dieta TLC (sigla para “terapia para mudança do estilo de vida”), o plano tem como principal 
-				objetivo reduzir a taxa de LDL, o “colesterol ruim”, prevenindo doenças cardiovasculares. O foco desse tipo de alimentação 
-				é diminuir significativamente o consumo de gordura, principalmente a saturada, encontrada nas carnes mais gordurosas, 
-				laticínios integrais e frituras, por exemplo. Recomenda-se que a gordura passe a representar até 7% do total de calorias 
-				consumidas ao longo do dia. A dieta ainda prevê a ingestão de fibras, presentes nos vegetais e alimentos integrais, que também 
-				contribuem com o combate ao colesterol alto.",
+			description: "Conhecido como dieta TLC (sigla para “terapia para mudança do estilo de vida”), o plano tem como principal "\
+				"objetivo reduzir a taxa de LDL, o “colesterol ruim”, prevenindo doenças cardiovasculares.\n\nO foco desse tipo de alimentação "\
+				"é diminuir significativamente o consumo de gordura, principalmente a saturada, encontrada nas carnes mais gordurosas, "\
+				"laticínios integrais e frituras, por exemplo. Recomenda-se que a gordura passe a representar até 7% do total de calorias "\
+				"consumidas ao longo do dia.\n\nA dieta ainda prevê a ingestão de fibras, presentes nos vegetais e alimentos integrais, que também "\
+				"contribuem com o combate ao colesterol alto.",
 			image: File.new("#{Rails.root}/app/assets/images/dieta-tlc.jpg")
 			).foods.push(
 			frutas,
@@ -184,9 +184,9 @@ Diet.create(name: "TLC",
 
 Diet.create(name: "Dieta da Fertilidade", 
 			goal: "Aumentar a ovulação",
-			description: "A dieta da fertilidade tem como objetivo aumentar a ovulação. É para mulheres, portanto. Criado por pesquisadores 
-				de Harvard, o plano alimentar prioriza a ingestão de gordura “boa”, grãos integrais, proteínas, óleos de origem vegetal e 
-				laticínios integrais e evita o consumo de gordura “ruim”, carboidratos refinados e carne vermelha. ",
+			description: "A dieta da fertilidade tem como objetivo aumentar a ovulação. É para mulheres, portanto.\n\nCriado por pesquisadores "\
+				"de Harvard, o plano alimentar prioriza a ingestão de gordura “boa”, grãos integrais, proteínas, óleos de origem vegetal e "\
+				"laticínios integrais e evita o consumo de gordura “ruim”, carboidratos refinados e carne vermelha. ",
 			image: File.new("#{Rails.root}/app/assets/images/dieta-da-fertilidade.jpg")
 			).foods.push(
 			frutas,
@@ -202,13 +202,13 @@ Diet.create(name: "Dieta da Fertilidade",
 
 Diet.create(name: "Dieta da Clínica Mayo", 
 			goal: "Emagrecer",
-			description: "O regime foi desenvolvido pela Clínica Mayo, instituição dos Estados Unidos que realiza pesquisas na área da saúde e 
-					oferece recomendações sobre prevenção de doenças. O objetivo é emagrecer. Os criadores afirmam que ela cause a perda de 2,5 
-					e 4,5 quilos nos primeiros quinze dias e, depois, de 0,5 a 1 quilo por semana. A dieta se baseia na adoção ou eliminação de 
-					hábitos do dia a dia associados aos quilos a mais. Exemplos: é proibido comer em frente à TV ou consumir açúcar nas primeiras 
-					duas semanas. O plano também recomenda que as refeições contenham todos os grupos alimentares, de vegetais a carboidratos e 
-					gorduras, mas nas quantidades indicadas pela pirâmide alimentar. Estudos já demonstraram que a dieta é eficaz na perda de peso 
-					e ajuda a proteger a saúde cardiovascular. Exercícios também estão incluídos -- de 30 minutos a 60 minutos diariamente.",
+			description: "O regime foi desenvolvido pela Clínica Mayo, instituição dos Estados Unidos que realiza pesquisas na área da saúde e "\
+					"oferece recomendações sobre prevenção de doenças. O objetivo é emagrecer. Os criadores afirmam que ela resulta na perda de 2,5 "\
+					"e 4,5 quilos nos primeiros quinze dias e, depois, de 0,5 a 1 quilo por semana.\n\nA dieta se baseia na adoção ou eliminação de "\
+					"hábitos do dia a dia associados aos quilos a mais. Exemplos: é proibido comer em frente à TV ou consumir açúcar nas primeiras "\
+					"duas semanas.\n\nO plano também recomenda que as refeições contenham todos os grupos alimentares, de vegetais a carboidratos e "\
+					"gorduras, mas nas quantidades indicadas pela pirâmide alimentar. Estudos já demonstraram que a dieta é eficaz na perda de peso "\
+					"e ajuda a proteger a saúde cardiovascular. Exercícios também estão incluídos -- de 30 minutos a 60 minutos diariamente.",
 			image: File.new("#{Rails.root}/app/assets/images/dieta-mayo.jpg")
 			).foods.push(
 			frutas,
@@ -223,11 +223,11 @@ Diet.create(name: "Dieta da Clínica Mayo",
 
 Diet.create(name: "Mediterrânea", 
 			goal: "Emagrecer e prevenir doencas cronicas",
-			description: "A Dieta do Mediterrâneo se baseia na alimentação seguida por habitantes de países banhados pelo Mar Mediterrâneo. 
-					O programa tem como objetivo a perda e a manutenção do peso e a prevenção de doenças crônicas com a baixa ingestão de carne 
-					vermelha, açúcar e gordura saturada. Por outro lado, o plano prevê um maior consumo de alimentos como nozes e castanhas, 
-					vegetais, grãos integrais, azeite de oliva e peixe. O vinho tinto também é indicado, com moderação. Requer a prática de 
-					exercícios leves, ao menos três vezes por semana, como caminhadas e a prática da jardinagem. ",
+			description: "A Dieta do Mediterrâneo se baseia na alimentação seguida por habitantes de países banhados pelo Mar Mediterrâneo.\n\n"\
+					"O programa tem como objetivo a perda e a manutenção do peso e a prevenção de doenças crônicas com a baixa ingestão de carne "\
+					"vermelha, açúcar e gordura saturada.\n\nPor outro lado, o plano prevê um maior consumo de alimentos como nozes e castanhas, "\
+					"vegetais, grãos integrais, azeite de oliva e peixe. O vinho tinto também é indicado, com moderação.\n\nRequer a prática de "\
+					"exercícios leves, ao menos três vezes por semana, como caminhadas e a prática da jardinagem. ",
 			image: File.new("#{Rails.root}/app/assets/images/dieta-mediterranea.jpg")
 			).foods.push(
 			frutas,
@@ -244,10 +244,10 @@ Diet.create(name: "Mediterrânea",
 
 Diet.create(name: "Dieta Vigilantes do Peso", 
 			goal: "Emagrecer",
-			description: "O Vigilantes do Peso faz parte da organização Weight Watchers, que surgiu nos Estados Unidos e ajuda na peso por 
-					meio de programas pagos de emagrecimento. Os participantes se inscrevem em um dos métodos disponíveis que consistem em 
-					reuniões de acompanhamento, sugestão de cardápios e receitas saudáveis com base no controle da quantidade de calorias 
-					consumidas diariamente",
+			description: "O Vigilantes do Peso faz parte da organização Weight Watchers, que surgiu nos Estados Unidos e ajuda na peso por "\
+					"meio de programas pagos de emagrecimento.\n\nOs participantes se inscrevem em um dos métodos disponíveis que consistem em "\
+					"reuniões de acompanhamento, sugestão de cardápios e receitas saudáveis com base no controle da quantidade de calorias "\
+					"consumidas diariamente",
 			image: File.new("#{Rails.root}/app/assets/images/dieta-vigilantes-do-peso.jpg")
 			).foods.push(
 			 Food.all
@@ -255,15 +255,15 @@ Diet.create(name: "Dieta Vigilantes do Peso",
 
 Diet.create(name: "Dieta Flexitariana", 
 			goal: "Perda de peso e a melhora da saúde",
-			description: "É um programa alimentar que objetiva a perda de peso e a melhora da saúde por meio de dois conceitos: flexibilidade 
-					e vegetarianismo. O termo foi usado pela primeira vez em 2009 pela nutricionista Americana Dawn Jackson Blatner. Segundo 
-					a especialista, não seria necessário eliminar completamente o consumo de carne para alcançar os benefícios do vegetarianismo. 
-					Bastaria adotar a prática na maior parte do tempo, sem deixar de comer um bife ou um hambúrguer de vez enquando, quando desse 
-					muita vontade. A dieta consiste em adicionar cinco grupos de alimentos à mesa - “novas carnes” (tofu, , feijão, lentilhas, 
-					ervilhas, nozes e sementes, e ovos ), frutas e vegetais, grãos integrais, laticínios, açúcares e pimentas. Além disso, a prática 
-					de exercícios é fortemente encorajada: recomenda-se 30 minutos diários de exercícios físicos moderados ou 20 minutos de 
-					exercícios intensos, cinco vezes por semana. Estudos mostraram que os adeptos perdem 15% do peso corporal, além de reduzir 
-					risco de doenças cardíacas, diabetes e câncer e vivem, em média, 3,6 anos mais em relação aos que não seguem o programa. ",
+			description: "É um programa alimentar que objetiva a perda de peso e a melhora da saúde por meio de dois conceitos: flexibilidade "\
+					"e vegetarianismo.\n\nO termo foi usado pela primeira vez em 2009 pela nutricionista Americana Dawn Jackson Blatner. Segundo "\
+					"a especialista, não seria necessário eliminar completamente o consumo de carne para alcançar os benefícios do vegetarianismo. "\
+					"Bastaria adotar a prática na maior parte do tempo, sem deixar de comer um bife ou um hambúrguer de vez enquando, quando desse "\
+					"muita vontade.\n\nA dieta consiste em adicionar cinco grupos de alimentos à mesa - “novas carnes” (tofu, , feijão, lentilhas, "\
+					"ervilhas, nozes e sementes, e ovos ), frutas e vegetais, grãos integrais, laticínios, açúcares e pimentas. Além disso, a prática "\
+					"de exercícios é fortemente encorajada: recomenda-se 30 minutos diários de exercícios físicos moderados ou 20 minutos de "\
+					"exercícios intensos, cinco vezes por semana.\n\nEstudos mostraram que os adeptos perdem 15% do peso corporal, além de reduzir "\
+					"risco de doenças cardíacas, diabetes e câncer e vivem, em média, 3,6 anos mais em relação aos que não seguem o programa. ",
 			image: File.new("#{Rails.root}/app/assets/images/dieta-flexitariana.jpg")
 			).foods.push(
 			castanhas,
@@ -278,15 +278,15 @@ Diet.create(name: "Dieta Flexitariana",
 
 Diet.create(name: "Dieta Volumétrica", 
 			goal: "Emagrecer",
-			description: "O conceito da dieta volumétrica consiste em estimular o consumo de alimentos pouco calóricos que promovem a saciedade. 
-					Eles são divididos em categorias: os chamados de baixíssima densidade, como frutas (figo, melancia, meão, uva, laranja e 
-					frutas vermelhas), e vegetais (folhas verdes, cenoura, beterraba, abóbora, berinjela) sem amido, leite desnatado e sopa à 
-					base de caldo; os de baixa densidade, como frutas e vegetais com amido, grãos, cereal matinal, carnes magras, legumes e pratos 
-					com baixo teor de gordura; alimentos de média densidade como carne, queijo, pizza, batata frita, molho de salada, pão, sorvete 
-					e bolo; e alimentos de alta densidade como biscoitos, salgadinho, doces de chocolate, biscoitos, nozes, manteiga e óleo. As 
-					comidas das categorias 1 e 2 podem ser ingeridas em grandes quantidades, o consumo dos alimentos da categoria 3 deve ser moderado 
-					e da categoria 4, evitado. Embora esta dieta seja mais um plano alimentar do que um programa de emagrecimento, para aqueles que 
-					querem um resultado melhor, a prática de exercícios – 30 minutos de caminhada na maior parte da semana – é encorajada. ",
+			description: "O conceito da dieta volumétrica consiste em estimular o consumo de alimentos pouco calóricos que promovem a saciedade.\n\n"\
+					"Eles são divididos em categorias: os chamados de baixíssima densidade, como frutas (figo, melancia, meão, uva, laranja e "\
+					"frutas vermelhas), e vegetais (folhas verdes, cenoura, beterraba, abóbora, berinjela) sem amido, leite desnatado e sopa à "\
+					"base de caldo; os de baixa densidade, como frutas e vegetais com amido, grãos, cereal matinal, carnes magras, legumes e pratos "\
+					"com baixo teor de gordura; alimentos de média densidade como carne, queijo, pizza, batata frita, molho de salada, pão, sorvete "\
+					"e bolo; e alimentos de alta densidade como biscoitos, salgadinho, doces de chocolate, biscoitos, nozes, manteiga e óleo.\n\nAs "\
+					"comidas das categorias 1 e 2 podem ser ingeridas em grandes quantidades, o consumo dos alimentos da categoria 3 deve ser moderado "\
+					"e da categoria 4, evitado.\n\nEmbora esta dieta seja mais um plano alimentar do que um programa de emagrecimento, para aqueles que "\
+					"querem um resultado melhor, a prática de exercícios – 30 minutos de caminhada na maior parte da semana – é encorajada. ",
 			image: File.new("#{Rails.root}/app/assets/images/missing.jpg")
 			).foods.push(
 			 Food.all

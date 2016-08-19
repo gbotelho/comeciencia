@@ -36,7 +36,7 @@
     <div class="large-12 columns">
       <%= f.fields_for :diets, @person.diets.first do |diet_fields| %>
         <%= diet_fields.label :goal, "Objetivo" %>
-        <%= diet_fields.select :goal, [['Emagrecer', 'lose_weight'],['Manter Peso', 'maintain_weight'],['Ganhar Massa', 'increase_weight']] %>
+        <%= diet_fields.select :goal, [['Saude e Bem-Estar', 'improve_health'], ['Emagrecer', 'lose_weight'],['Ganhar Massa Muscular', 'increase_weight']] %>
       <% end %>
       <% if @person.diets.first.errors.added? :goal %>
         <small class="error">Objetivo inválido.</small>

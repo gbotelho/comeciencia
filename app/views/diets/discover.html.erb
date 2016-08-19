@@ -32,9 +32,19 @@
 	<div class="large-12 columns">
 	  <div class="clearfix">
 	  	<center>
-	      <p><%= @diet.description %></p>
+	      <p class="text-center"><%= simple_format(@diet.description)%></p>
 	    </center>
 	  </div>
 	</div>
 </div>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <div class="clearfix">
+      	<center>
+			<h5><%= link_to 'Veja sua dieta personalizada', personalize_diet_path(@person), {class:"small button", style: "color:#FFFFFF;"} %></h5>
+		</center>
+      </div>
+    </div>
+  </div>
 

@@ -53,7 +53,7 @@ class DietsController < ApplicationController
 		@foods_dinner_proteins = @foods_person.select{ |item| ((item[:dinner] == true) && (item[:high_protein] == true))}
 		@foods_snack_proteins = @foods_person.select{ |item| ((item[:snack] == true) && (item[:high_protein] == true))}
 
-		@diet = Diet.find(params[:id_diet])
+		@diet = @person.diets.first
 		@person = Person.find(params[:id_person])
 		@foods = @person.foods
 		@diet.meals.clear
