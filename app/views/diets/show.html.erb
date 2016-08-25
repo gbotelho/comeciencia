@@ -16,8 +16,8 @@
 	  <% meal.portions.each do |portion| %>
 	    <tr>
 	      <td><%= portion.food.name %></td>
-	      <td><%= portion.size %></td>
-	      <td><%= portion.size * (portion.food.calories / portion.food.size) %></td>
+	      <td><%= number_with_precision(portion.size, precision: 2) %> <%= portion.food.unit %></td>
+	      <td><%= number_with_precision((portion.size * (portion.food.calories / portion.food.size)), precision: 2) %> cal</td>
 	    </tr>
 	  <% end %>
 	</table>

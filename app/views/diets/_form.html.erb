@@ -1,108 +1,85 @@
-<%= form_for @diet do |f| %>
- 
-<!--   <% if @diet.errors.any? %>
-    <div id="error_explanation">
-      <h2>
-        <%= pluralize(@diet.errors.count, "error") %> prohibited
-        this diet from being saved:
-      </h2>
-      <ul>
-        <% @diet.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %> -->
- 
-  <div class="row">
-    <div class="large-12 columns">
-      <%= f.label :calories %>
-      <div class="row">
-        <div class="small-10 columns">
-          <div class="range-slider" data-slider="<%=@diet.calories%>" data-options="display_selector: #calories_input;start: 1200; end: 1600; step: 10">
-            <span class="range-slider-handle" role="slider" tabindex="0" ></span>
-            <span class="range-slider-active-segment"></span>
-            <%= f.hidden_field :calories %>
-          </div>
-        </div>
-        <div class="small-2 columns">
-          <input type="number" id="calories_input" name="calories_input" value="<%=@diet.calories%>" />
-        </div>
-      </div>
-    </div>
-  </div>
+  <!--
+  <%= form_for @diet do |f| %>
+	  <div class="row">
+	    <div class="large-12 columns">
+	      <%= f.fields_for :diet do |diet_fields| %>
+	        <%= diet_fields.label :name, "Dê um nome para sua dieta" %>
+	        <%= diet_fields.text_field :name , placeholder: "Dieta para " + @diet.person.name, required: true %>
+	        <button class="small button right" name="submit" value="submit" type="submit">Salvar</button>
+	      <% end %>
+	    </div>
+	  </div>
+ <% end %>
+ -->
 
-  <div class="row">
-    <div class="large-12 columns">
-      <%= f.label :carbohydrate_percentage, "Carboidratos (%)" %>
-      <div class="row">
-        <div class="small-10 columns">
-          <div class="range-slider" data-slider="<%=@diet.carbohydrate_percentage%>" data-options="display_selector: #carbohydrate_percentage_input;initial: 34;">
-            <span class="range-slider-handle" role="slider" tabindex="0" ></span>
-            <span class="range-slider-active-segment"></span>
-            <%= f.hidden_field :carbohydrate_percentage %>
-          </div>
-        </div>
-        <div class="small-2 columns">
-          <input type="number" id="carbohydrate_percentage_input" name="carbohydrate_percentage_input" value="<%=@diet.carbohydrate_percentage%>" />
-        </div>
-      </div>
-      <% if @diet.errors.added?(:base, "A soma das % precisa totalizar 100%.") %>
-        <small class="error">A soma das % precisa totalizar 100%.</small>
-      <% end %>
-    </div>
-  </div>
+<div class="row">
+	<div class="large-12 columns">
+		 <% meals = @diet.meals.sort_by {|meal| meal.name}
+		 	meals.each do |meal| %>
 
-  <div class="row">
-    <div class="large-12 columns">
-      <%= f.label :protein_percentage, "Proteínas (%)" %>
-      <div class="row">
-        <div class="small-10 columns">
-          <div class="range-slider" data-slider="<%=@diet.protein_percentage%>" data-options="display_selector: #protein_percentage_input;initial: 33;">
-            <span class="range-slider-handle" role="slider" tabindex="0" ></span>
-            <span class="range-slider-active-segment"></span>
-            <%= f.hidden_field :protein_percentage %>
-          </div>
-        </div>
-        <div class="small-2 columns">
-          <input type="number" id="protein_percentage_input" name="carbohydrate_percentage_input" value="<%=@diet.protein_percentage%>" />
-        </div>
-      </div>
-      <% if @diet.errors.added?(:base, "A soma das % precisa totalizar 100%.") %>
-        <small class="error">A soma das % precisa totalizar 100%.</small>
-      <% end %>
-    </div>
-  </div>
+		 	<p><%= meal.name %>  - 
+		 	Calorias: <%= number_with_precision(meal.calories, precision: 0) %>
+		 	/ Carboidratos(%): <%= number_with_precision(meal.carbohydrate_percentage, precision: 1) %>
+		 	/ Proteínas(%): <%= number_with_precision(meal.protein_percentage, precision: 1) %>
+		 	/ Gorduras(%): <%= number_with_precision(meal.fat_percentage, precision: 1) %>
+		 	</p>
 
-  <div class="row">
-    <div class="large-12 columns">
-      <%= f.label :fat_percentage, "Gorduras (%)" %><br>
-      <div class="row">
-        <div class="small-10 columns">
-          <div class="range-slider" data-slider="<%=@diet.fat_percentage%>" data-options="display_selector: #fat_percentage_input;initial: 33;">
-            <span class="range-slider-handle" role="slider" tabindex="0" ></span>
-            <span class="range-slider-active-segment"></span>
-            <%= f.hidden_field :fat_percentage %>
-          </div>
-        </div>
-        <div class="small-2 columns">
-          <input type="number" id="fat_percentage_input" name="carbohydrate_percentage_input" value="<%=@diet.fat_percentage%>" />
-        </div>
-      </div>
-      <% if @diet.errors.added?(:base, "A soma das % precisa totalizar 100%.") %>
-        <small class="error">A soma das % precisa totalizar 100%.</small>
-      <% end %>
-    </div>
-  </div>
+		 	
+			<div class="large-12 columns">
+				<div class="row">
+					<% meal.portions.each do |portion| %>
+						<div class="large-4 small-6 columns">
+							<%= image_tag(portion.food.image.url,  border: 2) %>
+							<div class="panel">
+								<h5><%= portion.food.name %></h5>
+								<h6 class="subheader"><%= number_with_precision(portion.size, precision: 0) %> <%= portion.food.unit %></h6>
+								<h6 class="subheader"><%= number_with_precision((portion.size * (portion.food.calories / portion.food.size)), precision: 0) %> cal</h6>
+							</div>
+						</div>
+					<% end %>
+					<div class="large-4 small-6 columns">
+						<a href="#" data-reveal-id=<%= meal.name.gsub(/\s+/, "") %>><img src="http://placehold.it/1000x1000&amp;text=Adicionar"></a>
+					</div>
+				</div>
+			</div> 
+			
 
-  <div class="row">
-    <div class="large-12 columns">
-      <div class="clearfix">
-          <h4 class="left">Passo 2 de 5</h4>
-          <button class="small button right" name="submit" type="submit">Continuar</button>
-          <%= link_to 'Voltar', edit_person_path(@diet.person), class:"small button right secondary" %>
-      </div>
-    </div>
-  </div>
- 
+			<!--table>
+			  <tr>
+			    <th>Food Name</th>
+			    <th>Portion Size</th>
+			    <th>Calories</th>
+			  </tr>
+			 
+			  <% meal.portions.each do |portion| %>
+			    <tr>
+			      <td><%= portion.food.name %></td>
+			      <td><%= number_with_precision(portion.size, precision: 0) %> <%= portion.food.unit %></td>
+			      <td><%= number_with_precision((portion.size * (portion.food.calories / portion.food.size)), precision: 0) %> cal</td>
+			    </tr>
+			  <% end %>
+			</table-->
+			<!--a href="#" class="button" data-dropdown="drop">Adicionar Porcao &raquo;</a>
+			<ul id="drop" class="[tiny small medium large content]f-dropdown" data-dropdown-content>
+				<% @foods.each do |food| %>
+			  		<li><%= link_to food.name, add_food_meal_diet_path(@diet, meal, food) %></li>
+			  	<%end%>
+			</ul-->
+		<% end %>
+	</div>
+</div>
+
+ <% meals = @diet.meals.sort_by {|meal| meal.name}
+ 	meals.each do |meal| %>
+	<div id=<%= meal.name.gsub(/\s+/, "") %> class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+	  <h2 id="modalTitle">Awesome. I have it.</h2>
+	  <p class="lead">Your couch.  It is mine.</p>
+	  <p>I'm a cool paragraph that lives inside of an even cooler modal. Wins!</p>
+	  			<ul id="drop" class="[tiny small medium large content]f-dropdown" data-dropdown-content>
+					<% @foods.each do |food| %>
+				  		<li><%= link_to food.name, add_food_meal_diet_path(@diet, meal, food) %></li>
+				  	<%end%>
+				</ul-->
+	  <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+	</div>
 <% end %>

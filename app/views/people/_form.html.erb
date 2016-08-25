@@ -17,6 +17,21 @@
   </div>
 </div> -->
 
+
+  <div class="row">
+    <div class="large-12 columns">
+      <div class="row collapse">
+        <%= f.label :name, "Nome" %>
+        <div class="small-12 columns">
+          <%= f.text_field :name , placeholder: "José da Silva", required: true  %>
+        </div>
+      </div>
+      <% if @person.errors.added?(:name, :blank) %>
+        <small class="error">Nome não pode ser vazio.</small>
+      <% end %>
+    </div>
+  </div>
+
   <div class="row">
     <div class="large-12 columns">
       <%= f.fields_for :user do |user_fields| %>

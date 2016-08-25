@@ -7,110 +7,120 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 pao_integral = Food.create(name: "pão integral", calories: 68,
-	carbohydrate: 12.27, protein: 2.37, fat: 1.07, size: 26, 
+	carbohydrate: 12.27, protein: 2.37, fat: 1.07, size: 26, unit: "g",
 	breakfast: true, lunch: true, dinner: true, snack: true, 
 	high_carbohydrate: true, high_protein: false, high_fat: false,
 	image: File.new("#{Rails.root}/app/assets/images/pao-integral.jpg"))
 aveia = Food.create(name: "aveia", calories: 104,
-	carbohydrate: 17, protein: 4.3, fat: 2.2, size: 30, 
+	carbohydrate: 17, protein: 4.3, fat: 2.2, size: 30, unit: "g",
 	breakfast: true, lunch: false, dinner: false, snack: true, 
 	high_carbohydrate: true, high_protein: false, high_fat: false,
 	image: File.new("#{Rails.root}/app/assets/images/aveia.jpg"))
-feijao_preto = Food.create(name: "feijão preto", 
+feijao_preto = Food.create(name: "feijão preto", calories: 339,
+	carbohydrate: 63, protein: 21, fat: 0.9, size: 100, unit: "g",
 	breakfast: false, lunch: true, dinner: true, snack: false, 
+	high_carbohydrate: true, high_protein: false, high_fat: false,
 	image: File.new("#{Rails.root}/app/assets/images/feijao-preto.jpg"))
 arroz_integral = Food.create(name: "arroz integral", calories: 111,
-	carbohydrate: 22.96, protein: 2.58, fat: 0.9, size: 100, 
+	carbohydrate: 22.96, protein: 2.58, fat: 0.9, size: 100, unit: "g",
 	breakfast: false, lunch: true, dinner: true, snack: false, 
 	high_carbohydrate: true, high_protein: false, high_fat: false,
 	image: File.new("#{Rails.root}/app/assets/images/arroz-integral.jpg"))
 macarrao_integral = Food.create(name: "macarrão integral", calories: 270,
-	carbohydrate: 56, protein: 9.2, fat: 1.1, size: 80, 
+	carbohydrate: 56, protein: 9.2, fat: 1.1, size: 80, unit: "g",
 	breakfast: false, lunch: true, dinner: true, snack: false, 
 	high_carbohydrate: true, high_protein: false, high_fat: false,
 	image: File.new("#{Rails.root}/app/assets/images/macarrao-integral.jpg"))
 cookies_de_aveia = Food.create(name: "cookies de aveia", calories: 112,
-	carbohydrate: 17.18, protein: 1.55, fat: 4.52, size: 25, 
+	carbohydrate: 17.18, protein: 1.55, fat: 4.52, size: 25, unit: "g",
 	breakfast: true, lunch: false, dinner: false, snack: true, 
 	high_carbohydrate: true, high_protein: false, high_fat: false,
 	image: File.new("#{Rails.root}/app/assets/images/cookies-aveia.jpg"))
 maca = Food.create(name: "maca", calories: 72,
-	carbohydrate: 19.06, protein: 0.36, fat: 0.23, size: 150, 
+	carbohydrate: 19.06, protein: 0.36, fat: 0.23, size: 150, unit: "g",
 	breakfast: true, lunch: false, dinner: false, snack: true, 
 	high_carbohydrate: true, high_protein: false, high_fat: false,
 	image: File.new("#{Rails.root}/app/assets/images/maca.jpg"))
 pera = Food.create(name: "pera", calories: 96,
-	carbohydrate: 25.66, protein: 0.63, fat: 0.2, size: 180, 
+	carbohydrate: 25.66, protein: 0.63, fat: 0.2, size: 180, unit: "g",
 	breakfast: true, lunch: false, dinner: false, snack: true, 
 	high_carbohydrate: true, high_protein: false, high_fat: false,
 	image: File.new("#{Rails.root}/app/assets/images/pera.jpg"))
-morango = Food.create(name: "morango", 
-	breakfast: false, lunch: true, dinner: true, snack: false, 
+morango = Food.create(name: "morango", calories: 33,
+	carbohydrate: 8, protein: 0.7, fat: 0.3, size: 100, unit: "g",
+	breakfast: true, lunch: false, dinner: false, snack: true, 
+	high_carbohydrate: true, high_protein: false, high_fat: false,
 	image: File.new("#{Rails.root}/app/assets/images/morango.jpg"))
-alface = Food.create(name: "alface", 
+alface = Food.create(name: "alface",calories: 15,
+	carbohydrate: 2.9, protein: 1.4, fat: 0.2, size: 100, unit: "g", 
 	breakfast: false, lunch: true, dinner: true, snack: false, 
+	high_carbohydrate: true, high_protein: false, high_fat: false,
 	image: File.new("#{Rails.root}/app/assets/images/alface.jpg"))
-cenoura = Food.create(name: "cenoura", 
+cenoura = Food.create(name: "cenoura", calories: 41,
+	carbohydrate: 10, protein: 0.9, fat: 0.2, size: 100, unit: "g",
 	breakfast: false, lunch: true, dinner: true, snack: false, 
+	high_carbohydrate: true, high_protein: false, high_fat: false,
 	image: File.new("#{Rails.root}/app/assets/images/cenoura.jpg"))
 
-vinho = Food.create(name: "vinho", 
-	breakfast: false, lunch: true, dinner: true, snack: false, 
+vinho = Food.create(name: "vinho", calories: 83,
+	carbohydrate: 2.7, protein: 0.1, fat: 0, size: 100, unit: "g",
+	breakfast: false, lunch: false, dinner: false, snack: false, 
+	high_carbohydrate: true, high_protein: false, high_fat: false,
 	image: File.new("#{Rails.root}/app/assets/images/vinho.jpg"))
 
 leite_desnatado = Food.create(name: "leite desnatado", calories: 74,
-	carbohydrate: 10, protein: 6.4, fat: 0.8, size: 200, 
+	carbohydrate: 10, protein: 6.4, fat: 0.8, size: 200, unit: "ml",
 	breakfast: true, lunch: false, dinner: false, snack: true, 
 	high_carbohydrate: false, high_protein: true, high_fat: false,
 	image: File.new("#{Rails.root}/app/assets/images/leite-desnatado.jpg"))
 ovo = Food.create(name: "ovo", calories: 74,
-	carbohydrate: 0.38, protein: 6.29, fat: 4.97, size: 50, 
+	carbohydrate: 0.38, protein: 6.29, fat: 4.97, size: 50, unit: "g",
 	breakfast: true, lunch: true, dinner: true, snack: false, 
 	high_carbohydrate: false, high_protein: true, high_fat: false,
 	image: File.new("#{Rails.root}/app/assets/images/ovo.jpg"))
 iogurte_desnatado = Food.create(name: "iogurte desnatado", calories: 57,
-	carbohydrate: 7.8, protein: 5.8, fat: 0, size: 160, 
+	carbohydrate: 7.8, protein: 5.8, fat: 0, size: 160, unit: "g",
 	breakfast: true, lunch: false, dinner: false, snack: true, 
 	high_carbohydrate: false, high_protein: true, high_fat: false,
 	image: File.new("#{Rails.root}/app/assets/images/iogurte-desnatado.jpg"))
 bife_file_mignon = Food.create(name: "bife file mignon", calories: 169,
-	carbohydrate: 0, protein: 20.78, fat: 8.85, size: 100, 
+	carbohydrate: 0, protein: 20.78, fat: 8.85, size: 100, unit: "g",
 	breakfast: false, lunch: true, dinner: true, snack: false, 
 	high_carbohydrate: false, high_protein: true, high_fat: false,
 	image: File.new("#{Rails.root}/app/assets/images/bife-filet-mignon.jpg"))
 frango = Food.create(name: "frango", calories: 195,
-	carbohydrate: 0, protein: 29.55, fat: 7.72, size: 100, 
+	carbohydrate: 0, protein: 29.55, fat: 7.72, size: 100, unit: "g",
 	breakfast: false, lunch: true, dinner: true, snack: false, 
 	high_carbohydrate: false, high_protein: true, high_fat: false,
 	image: File.new("#{Rails.root}/app/assets/images/frango.jpg"))
 salmao = Food.create(name: "salmão", calories: 146,
-	carbohydrate: 0, protein: 21.62, fat: 5.93, size: 100, 
+	carbohydrate: 0, protein: 21.62, fat: 5.93, size: 100, unit: "g",
 	breakfast: false, lunch: true, dinner: true, snack: false, 
 	high_carbohydrate: false, high_protein: true, high_fat: false,
 	image: File.new("#{Rails.root}/app/assets/images/salmao.jpg"))
 atum = Food.create(name: "atum", calories: 54,
-	carbohydrate: 0, protein: 12, fat: 0.7, size: 60, 
+	carbohydrate: 0, protein: 12, fat: 0.7, size: 60, unit: "g",
 	breakfast: false, lunch: true, dinner: true, snack: true, 
 	high_carbohydrate: false, high_protein: true, high_fat: false,
 	image: File.new("#{Rails.root}/app/assets/images/atum.jpg"))
 
 castanhas_de_caju = Food.create(name: "castanhas de caju", calories: 90,
-	carbohydrate: 2.9, protein: 3.3, fat: 7.3, size: 15, 
+	carbohydrate: 2.9, protein: 3.3, fat: 7.3, size: 15, unit: "g",
 	breakfast: true, lunch: false, dinner: false, snack: true, 
 	high_carbohydrate: false, high_protein: true, high_fat: true,
 	image: File.new("#{Rails.root}/app/assets/images/castanhas-de-caju.jpg"))
 pasta_de_amendoim = Food.create(name: "pasta de amendoim", calories: 88,
-	carbohydrate: 2.99, protein: 3.67, fat: 7.48, size: 15, 
+	carbohydrate: 2.99, protein: 3.67, fat: 7.48, size: 15, unit: "g",
 	breakfast: true, lunch: false, dinner: false, snack: true, 
 	high_carbohydrate: false, high_protein: true, high_fat: true,
 	image: File.new("#{Rails.root}/app/assets/images/pasta-de-amendoim.jpg"))
 azeite = Food.create(name: "azeite", calories: 119,
-	carbohydrate: 0, protein: 0, fat: 13.5, size: 14, 
+	carbohydrate: 0, protein: 0, fat: 13.5, size: 14, unit: "g",
 	breakfast: false, lunch: true, dinner: true, snack: false, 
 	high_carbohydrate: false, high_protein: false, high_fat: true,
 	image: File.new("#{Rails.root}/app/assets/images/azeite.jpg"))
 semente_de_girassol = Food.create(name: "semente de girassol", calories: 570,
-	carbohydrate: 18.76, protein: 22.78, fat: 49.57, size: 100, 
+	carbohydrate: 18.76, protein: 22.78, fat: 49.57, size: 100, unit: "g",
 	breakfast: false, lunch: true, dinner: true, snack: false, 
 	high_carbohydrate: false, high_protein: true, high_fat: true,
 	image: File.new("#{Rails.root}/app/assets/images/semente-de-girassol.jpg"))

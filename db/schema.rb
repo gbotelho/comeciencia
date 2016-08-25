@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 20160711012347) do
   create_table "foods", force: :cascade do |t|
     t.string   "name"
     t.float    "size"
+    t.string   "unit"
     t.float    "calories"
     t.float    "protein"
     t.float    "carbohydrate"
