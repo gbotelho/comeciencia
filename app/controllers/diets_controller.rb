@@ -92,6 +92,22 @@ class DietsController < ApplicationController
 		redirect_to edit_diet_path(@diet)
 	end
 
+	def remove_portion_meal
+		@diet = Diet.find(params[:id_diet])
+		portion = Portion.find(params[:id_portion])
+		meal = Meal.find(params[:id_meal])
+		food = portion.food
+		meal.portions.delete(portion)
+		meal.calories =  meal.calories.to_f - food.calories * (portion.size / food.size)
+		@diet.calories =  @diet.calories.to_f - food.calories * (portion.size / food.size)
+		calculateMealPercentages(meal)
+		calculateDietPercentages(@diet)
+		meal.save
+		@diet.save
+		@foods = Food.all
+		redirect_to edit_diet_path(@diet)
+	end
+
 	def discover
 		@person = Person.find(params[:id_person])
 		@foods_person = @person.foods

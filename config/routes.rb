@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get 'diet/personalize/:id_person' => 'diets#personalize', :as => :personalize_diet
   get 'diet/discover/:id_person' => 'diets#discover', :as => :discover_diet
   get 'diet/add_food_meal/:id_diet/:id_meal/:id_food' => 'diets#add_food_meal', :as => :add_food_meal_diet
+  get 'diet/remove_portion_meal/:id_diet/:id_meal/:id_portion' => 'diets#remove_portion_meal', :as => :remove_portion_meal_diet
   get 'welcome/index'
 
   # The priority is based upon order of creation: first created -> highest priority.

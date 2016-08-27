@@ -12,6 +12,17 @@
  <% end %>
  -->
 
+ <div class="row">
+	<div class="large-12 columns">
+	 	<p>Totais da Dieta  - 
+	 	Calorias: <%= number_with_precision(@diet.calories, precision: 0) %>
+	 	/ Carboidratos(%): <%= number_with_precision(@diet.carbohydrate_percentage, precision: 1) %>
+	 	/ Proteínas(%): <%= number_with_precision(@diet.protein_percentage, precision: 1) %>
+	 	/ Gorduras(%): <%= number_with_precision(@diet.fat_percentage, precision: 1) %>
+	 	</p>
+	</div>
+</div>
+
 <div class="row">
 	<div class="large-12 columns">
 		 <% meals = @diet.meals.sort_by {|meal| meal.name}
@@ -31,9 +42,12 @@
 						<div class="large-4 small-6 columns">
 							<%= image_tag(portion.food.image.url,  border: 2) %>
 							<div class="panel">
-								<h5><%= portion.food.name %></h5>
-								<h6 class="subheader"><%= number_with_precision(portion.size, precision: 0) %> <%= portion.food.unit %></h6>
-								<h6 class="subheader"><%= number_with_precision((portion.size * (portion.food.calories / portion.food.size)), precision: 0) %> cal</h6>
+								<h5><strong><%= portion.food.name %></strong></h5>
+								<h6 class="subheader database-value"><%= number_with_precision(portion.size, precision: 0) %> <%= portion.food.unit %> - <%= number_with_precision((portion.size * (portion.food.calories / portion.food.size)), precision: 0) %> cal</h6>
+								<h6><%= link_to 'Remover', remove_portion_meal_diet_path(@diet, meal, portion), {class:"small button", style: "color:#FFFFFF;"} %></h6>
+
+								<a href="#" data-reveal-id=<%= meal.name.gsub(/\s+/, "") %>>Alterar Porcao</a>
+
 							</div>
 						</div>
 					<% end %>
@@ -72,14 +86,12 @@
  <% meals = @diet.meals.sort_by {|meal| meal.name}
  	meals.each do |meal| %>
 	<div id=<%= meal.name.gsub(/\s+/, "") %> class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-	  <h2 id="modalTitle">Awesome. I have it.</h2>
-	  <p class="lead">Your couch.  It is mine.</p>
-	  <p>I'm a cool paragraph that lives inside of an even cooler modal. Wins!</p>
-	  			<ul id="drop" class="[tiny small medium large content]f-dropdown" data-dropdown-content>
-					<% @foods.each do |food| %>
-				  		<li><%= link_to food.name, add_food_meal_diet_path(@diet, meal, food) %></li>
-				  	<%end%>
-				</ul-->
+	  <h2 id="modalTitle">Adicione uma comida a sua dieta</h2>
+		<ul id="drop" class="[tiny small medium large content]f-dropdown" data-dropdown-content>
+			<% @foods.each do |food| %>
+		  		<li><%= link_to food.name, add_food_meal_diet_path(@diet, meal, food) %></li>
+		  	<%end%>
+		</ul-->
 	  <a class="close-reveal-modal" aria-label="Close">&#215;</a>
 	</div>
 <% end %>
