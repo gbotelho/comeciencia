@@ -43,10 +43,35 @@
 							<%= image_tag(portion.food.image.url,  border: 2) %>
 							<div class="panel">
 								<h5><strong><%= portion.food.name %></strong></h5>
-								<h6 class="subheader database-value"><%= number_with_precision(portion.size, precision: 0) %> <%= portion.food.unit %> - <%= number_with_precision((portion.size * (portion.food.calories / portion.food.size)), precision: 0) %> cal</h6>
-								<h6><%= link_to 'Remover', remove_portion_meal_diet_path(@diet, meal, portion), {class:"small button", style: "color:#FFFFFF;"} %></h6>
 
-								<a href="#" data-reveal-id=<%= meal.name.gsub(/\s+/, "") %>>Alterar Porcao</a>
+								<div id="<%="form_show_portion_" + portion.object_id.to_s%>">
+									<h6 class="subheader database-value"><%= number_with_precision(portion.size, precision: 0) %> <%= portion.food.unit %> - <%= number_with_precision((portion.size * (portion.food.calories / portion.food.size)), precision: 0) %> cal</h6>
+								</div>
+
+								<div id="<%="form_edit_portion_" + portion.object_id.to_s%>" class="hidden">
+									<%= form_for portion, url: update_portion_diet_path(@diet, meal, portion), html: { method: :put } do |f| %>
+							      	      <div class="row collapse">
+									        <%= f.label :size, "Tamanho da porcao" %>
+									        <div class="large-5 columns">
+									          <%= f.text_field :size , placeholder:portion.size.to_s + portion.food.unit %>
+									        </div>
+									        <div class="small-4 columns">
+									          <button class="small button right" name="submit" value="submit" type="submit">Salvar</button>
+									        </div>
+									      </div>
+									<% end %>
+								</div>
+
+								<div class="row collapse">
+							        <div class="large-4 columns">
+							          <a href="#" class="small button" style="color:#FFFFFF;" onclick="showHideDiv('<%="form_edit_portion_" + portion.object_id.to_s%>');showHideDiv('<%="form_show_portion_" + portion.object_id.to_s%>');">Editar Porcao</a>
+							        </div>
+							        <div class="small-5 columns">
+							          <h6><%= link_to 'Remover', remove_portion_meal_diet_path(@diet, meal, portion), {class:"small button", style: "color:#FFFFFF;"} %></h6>
+							        </div>
+							      </div>
+								
+								
 
 							</div>
 						</div>

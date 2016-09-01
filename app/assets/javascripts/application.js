@@ -19,6 +19,25 @@
 
 $(function(){ $(document).foundation(); });
 
+function showHideDiv(elementId) {
+    if (document.getElementById) {
+        var element = document.getElementById(elementId);
+        if (element.style.visibility == 'hidden' || element.classList.contains("hidden")) {
+        	element.classList.remove("hidden")
+            element.style.visibility = 'visible';
+        } else {
+            element.style.visibility = 'hidden';
+        }
+    }
+} 
+
+function alternateName(element, oneName, anotherName) {
+    if (element.text == oneName) {
+        element.text = anotherName;
+    } else {
+        element.text = oneName;
+    }
+} 
 
 // $(document).ready(function(){
 //   $(document).foundation('reflow');

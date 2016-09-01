@@ -3,6 +3,7 @@ class Diet < ActiveRecord::Base
 	has_and_belongs_to_many :meals
 	has_and_belongs_to_many :foods
 	has_attached_file :image, default_url: "missing.jpg"
+	accepts_nested_attributes_for :meals
 	validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 #	validates :goal, presence: true
 	validate :percentages_must_sum_up_100

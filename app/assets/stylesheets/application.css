@@ -16,6 +16,9 @@
 
  */
 
+div.hidden { visibility: hidden;}
+div.visibility_visible { visibility: visible;}
+
 /* Change color of required labels to red */
  label.required:after {
     content: " *";

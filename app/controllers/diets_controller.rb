@@ -40,26 +40,29 @@ class DietsController < ApplicationController
 	  render 'edit'
 	end
 
-	def calculateMealPercentages(meal)
+	def calculateMealProperties(meal)
 		carbs   = 0.0
 		protein = 0.0
 		fat     = 0.0
+		meal.calories = 0
 		meal.portions.each do |portion|
 			food = portion.food
 			portion_size = portion.size
 			carbs   += food.carbohydrate * (portion_size / food.size)
 			protein += food.protein * (portion_size / food.size)
 			fat     += food.fat * (portion_size / food.size)
+			meal.calories += food.calories * (portion_size / food.size)
 		end
 		meal.carbohydrate_percentage = 100 * carbs   / (carbs + protein + fat)
 		meal.protein_percentage      = 100 * protein / (carbs + protein + fat)
 		meal.fat_percentage          = 100 * fat     / (carbs + protein + fat)
 	end
 
-	def calculateDietPercentages(diet)
+	def calculateDietProperties(diet)
 		carbs   = 0.0
 		protein = 0.0
 		fat     = 0.0
+		diet.calories = 0 
 		diet.meals.each do |meal| 
 			meal.portions.each do |portion|
 				food = portion.food
@@ -67,12 +70,27 @@ class DietsController < ApplicationController
 				carbs   += food.carbohydrate * (portion_size / food.size)
 				protein += food.protein * (portion_size / food.size)
 				fat     += food.fat * (portion_size / food.size)
+				diet.calories += food.calories * (portion_size / food.size)
 			end
 		end
 		diet.carbohydrate_percentage = 100 * carbs   / (carbs + protein + fat)
 		diet.protein_percentage      = 100 * protein / (carbs + protein + fat)
 		diet.fat_percentage          = 100 * fat     / (carbs + protein + fat)
 	end
+
+	def update_portion
+	  @diet = Diet.find(params[:id_diet])
+	  meal = Meal.find(params[:id_meal])
+	  portion = Portion.find(params[:id_portion])
+	  portion.update(portion_params)
+	  calculateMealProperties(meal)
+	  calculateDietProperties(@diet)
+	  meal.save
+	  @diet.save
+	  @foods = Food.all
+	  redirect_to edit_diet_path(@diet)
+	end
+
 
 	def add_food_meal
 		@diet = Diet.find(params[:id_diet])
@@ -82,10 +100,8 @@ class DietsController < ApplicationController
 		portion.size = food.size
 		portion.food = food
 		meal.portions << portion
-		meal.calories =  meal.calories.to_f + food.calories
-		@diet.calories =  @diet.calories.to_f + food.calories
-		calculateMealPercentages(meal)
-		calculateDietPercentages(@diet)
+		calculateMealProperties(meal)
+		calculateDietProperties(@diet)
 		meal.save
 		@diet.save
 		@foods = Food.all
@@ -98,10 +114,8 @@ class DietsController < ApplicationController
 		meal = Meal.find(params[:id_meal])
 		food = portion.food
 		meal.portions.delete(portion)
-		meal.calories =  meal.calories.to_f - food.calories * (portion.size / food.size)
-		@diet.calories =  @diet.calories.to_f - food.calories * (portion.size / food.size)
-		calculateMealPercentages(meal)
-		calculateDietPercentages(@diet)
+		calculateMealProperties(meal)
+		calculateDietProperties(@diet)
 		meal.save
 		@diet.save
 		@foods = Food.all
@@ -428,6 +442,10 @@ class DietsController < ApplicationController
 
 	private
 	  def diet_params
-	    params.require(:diet).permit(:name, :calories, :carbohydrate_percentage, :protein_percentage, :fat_percentage)
+	    params.require(:diet).permit(:name, :calories, :carbohydrate_percentage, :protein_percentage, :fat_percentage, meals_attributes: [:id, portions_attributes:[:id, :size]])
+	  end
+
+	  def portion_params
+	    params.require(:portion).permit(:size)
 	  end
 end
