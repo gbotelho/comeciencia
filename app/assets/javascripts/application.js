@@ -22,11 +22,11 @@ $(function(){ $(document).foundation(); });
 function showHideDiv(elementId) {
     if (document.getElementById) {
         var element = document.getElementById(elementId);
-        if (element.style.visibility == 'hidden' || element.classList.contains("hidden")) {
+        if (element.style.display == 'none' || element.classList.contains("hidden")) {
         	element.classList.remove("hidden")
-            element.style.visibility = 'visible';
+            element.style.display = 'block';
         } else {
-            element.style.visibility = 'hidden';
+            element.style.display = 'none';
         }
     }
 } 

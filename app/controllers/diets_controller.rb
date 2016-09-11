@@ -81,45 +81,57 @@ class DietsController < ApplicationController
 	def update_portion
 	  @diet = Diet.find(params[:id_diet])
 	  meal = Meal.find(params[:id_meal])
-	  portion = Portion.find(params[:id_portion])
-	  portion.update(portion_params)
+	  @portion = Portion.find(params[:id_portion])
+	  @portion.update(portion_params)
 	  calculateMealProperties(meal)
 	  calculateDietProperties(@diet)
 	  meal.save
 	  @diet.save
 	  @foods = Food.all
-	  redirect_to edit_diet_path(@diet)
+
+	  respond_to do |format|
+	    format.js 
+	    format.html
+	  end
 	end
 
 
 	def add_food_meal
 		@diet = Diet.find(params[:id_diet])
-		meal = Meal.find(params[:id_meal])
+		@meal = Meal.find(params[:id_meal])
 		food = Food.find(params[:id_food])
-		portion = Portion.new
-		portion.size = food.size
-		portion.food = food
-		meal.portions << portion
-		calculateMealProperties(meal)
+		@portion = Portion.new
+		@portion.size = food.size
+		@portion.food = food
+		@meal.portions << @portion
+		calculateMealProperties(@meal)
 		calculateDietProperties(@diet)
-		meal.save
+		@meal.save
 		@diet.save
 		@foods = Food.all
-		redirect_to edit_diet_path(@diet)
+
+		respond_to do |format|
+	    	format.js 
+	    	format.html
+	  	end
 	end
 
 	def remove_portion_meal
 		@diet = Diet.find(params[:id_diet])
-		portion = Portion.find(params[:id_portion])
+		@portion = Portion.find(params[:id_portion])
 		meal = Meal.find(params[:id_meal])
-		food = portion.food
-		meal.portions.delete(portion)
+		food = @portion.food
+		meal.portions.delete(@portion)
 		calculateMealProperties(meal)
 		calculateDietProperties(@diet)
 		meal.save
 		@diet.save
 		@foods = Food.all
-		redirect_to edit_diet_path(@diet)
+
+		respond_to do |format|
+	    	format.js 
+	    	format.html
+	  	end
 	end
 
 	def discover
