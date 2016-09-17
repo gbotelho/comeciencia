@@ -53,10 +53,10 @@ class PeopleController < ApplicationController
 
     private
 	  def person_params
-	    params.require(:person).permit(:name, :height, :weight, :age, :sex, user_attributes: [:email], diets_attributes: [:id, :goal])
+	    params.require(:person).permit(:name, :height, :weight, :age, :sex, user_attributes: [:email, :password, :password_confirmation, :encrypted_password], diets_attributes: [:id, :goal])
 	  end
 
 	  def person_params_new
-	    params.require(:person).permit(:name, :height, :weight, :age, :sex, user_attributes: [:email])
+	    params.require(:person).permit(:name, :height, :weight, :age, :sex, user_attributes: [:email, :password, :password_confirmation, :encrypted_password])
 	  end
 end

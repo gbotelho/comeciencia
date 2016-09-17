@@ -1,0 +1,27 @@
+<div class="large-3 large-centered columns">
+  <div class="login-box">
+  <div class="row">
+  <div class="large-12 columns">
+  <%= flash[:message] %>
+  <%= flash[:notice] %>
+    <%=form_tag login_user_path do%>
+       <div class="row">
+         <div class="large-12 columns">
+             <input type="text" name="email" placeholder="Email" />
+         </div>
+       </div>
+      <div class="row">
+         <div class="large-12 columns">
+             <input type="password" name="password" placeholder="Password" />
+         </div>
+      </div>
+      <div class="row">
+        <div class="large-12 large-centered columns">
+          <input type="submit" class="button expand" value="Log In"/>
+        </div>
+      </div>
+    <%end%>
+  </div>
+</div>
+</div>
+</div>

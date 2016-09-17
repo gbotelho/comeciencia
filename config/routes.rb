@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   get 'diet/add_food_meal/:id_diet/:id_meal/:id_food' => 'diets#add_food_meal', :as => :add_food_meal_diet
   get 'diet/remove_portion_meal/:id_diet/:id_meal/:id_portion' => 'diets#remove_portion_meal', :as => :remove_portion_meal_diet
   put 'diet/update_portion/:id_diet/:id_meal/:id_portion' => 'diets#update_portion', :as => :update_portion_diet
+  get 'user/login' => 'users#login', :as => :login_user
+  post 'user/login' => 'users#authenticate', :as => :authenticate_user
   get 'welcome/index'
 
   # The priority is based upon order of creation: first created -> highest priority.

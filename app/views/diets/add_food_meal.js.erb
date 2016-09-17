@@ -34,7 +34,7 @@ $('.close-reveal-modal').click();
 var html = "<div id='div_portion_<%=@portion.id.to_s%>' class='large-3 small-6 columns'>\
 				 <img border='2' src='<%=@portion.food.image.url%>'>\
 				 <div class='panel'>\
-				 	<h5><strong><%=@portion.food.name %></strong></h5>\
+				 	<h6><strong><%=@portion.food.name %></strong></h6>\
 				 	<div id='form_show_portion_<%=@portion.id.to_s%>'>\
 				 		<h6 id='form_show_portion_<%=@portion.id.to_s%>_h6' class='subheader database-value'><%= number_with_precision(@portion.size, precision: 0) %> <%= @portion.food.unit %> - <%= number_with_precision((@portion.size * (@portion.food.calories / @portion.food.size)), precision: 0) %> cal</h6>\
 				 	</div>\

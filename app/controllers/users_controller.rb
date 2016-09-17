@@ -61,6 +61,22 @@ class UsersController < ApplicationController
     end
   end
 
+  def authenticate
+    @user = User.authenticate(params[:email], params[:password])
+    if @user
+      flash[:notice] = "You've been logged in."
+      session[:user_id] = @user.id
+      redirect_to edit_diet_path(@user.person.diets.first)
+    else
+      flash[:alert] = "There was a problem logging you in."
+      redirect_to login_user_path
+    end
+  end
+
+  def login
+
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user

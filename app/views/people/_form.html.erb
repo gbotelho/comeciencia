@@ -41,12 +41,40 @@
       <% if @person.user.errors.added? :email, :blank %>
         <small class="error">E-mail não pode ser vazio.</small>
       <% end %>
-      <% if @person.user.email? && (@person.user.errors[:email] != nil) %>
+      <% if (@person.user.errors.added? :email) && (@person.user.errors[:email] != nil) %>
         <small class="error">E-mail inválido ou já registrado.</small>
       <% end %>
     </div>
   </div>
  
+  <div class="row">
+    <div class="large-12 columns">
+      <%= f.fields_for :user do |user_fields| %>
+        <%= user_fields.label :password, "Senha" %>
+        <%= user_fields.password_field :password , required: true %>
+      <% end %>
+      <% if @person.user.errors.size>0 %>
+          <% @person.user.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <%= f.fields_for :user do |user_fields| %>
+        <%= user_fields.label :password_confirmation, "Confirme sua senha" %>
+        <%= user_fields.password_field :password_confirmation , required: true %>
+      <% end %>
+      <% if @person.user.errors.size>0 %>
+          <% @person.user.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+      <% end %>
+    </div>
+  </div>
+
   <div class="row">
     <div class="large-12 columns">
       <%= f.fields_for :diets, @person.diets.first do |diet_fields| %>
