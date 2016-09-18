@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get 'food/list_carbs/:id_person' => 'foods#list_carbs', :as => :list_carbs_food
   get 'food/list_proteins/:id_person' => 'foods#list_proteins', :as => :list_proteins_food
   get 'food/list_fats/:id_person' => 'foods#list_fats', :as => :list_fats_food
-  get 'diet/personalize/:id_person' => 'diets#personalize', :as => :personalize_diet
+  get 'diet/personalize/:id_person/:id_diet' => 'diets#personalize', :as => :personalize_diet
   get 'diet/discover/:id_person' => 'diets#discover', :as => :discover_diet
   get 'diet/add_food_meal/:id_diet/:id_meal/:id_food' => 'diets#add_food_meal', :as => :add_food_meal_diet
   get 'diet/remove_portion_meal/:id_diet/:id_meal/:id_portion' => 'diets#remove_portion_meal', :as => :remove_portion_meal_diet

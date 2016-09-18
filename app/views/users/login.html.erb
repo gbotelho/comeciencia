@@ -2,8 +2,12 @@
   <div class="login-box">
   <div class="row">
   <div class="large-12 columns">
-  <%= flash[:message] %>
-  <%= flash[:notice] %>
+     <div class="row">
+     	<div class="large-12 columns">
+        	<%= flash[:alert] %>
+  			<%= flash[:notice] %>
+    	</div>
+   	</div>
     <%=form_tag login_user_path do%>
        <div class="row">
          <div class="large-12 columns">

@@ -42,8 +42,8 @@
     <div class="large-12 columns">
       <div class="clearfix">
       	<center>
-			<h5><%= link_to 'Veja uma sugestão de dieta para você', personalize_diet_path(@person), {class:"small button", style: "color:#FFFFFF;"} %></h5>
-			<h5><%= link_to 'Monte sua dieta personalizada', edit_diet_path(@person.diets.first), {class:"small button", style: "color:#FFFFFF;"} %></h5>
+			<h5><%= link_to 'Veja uma sugestão de dieta para você', personalize_diet_path(@person, @diet), {class:"small button", style: "color:#FFFFFF;"} %></h5>
+<!-- 			<h5><%= link_to 'Monte sua dieta personalizada', edit_diet_path(@person.diets.first), {class:"small button", style: "color:#FFFFFF;"} %></h5> -->
 		</center>
       </div>
     </div>

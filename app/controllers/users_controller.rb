@@ -68,7 +68,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect_to edit_diet_path(@user.person.diets.first)
     else
-      flash[:alert] = "There was a problem logging you in."
+      flash[:alert] = "There was a problem logging you in. Verify the email and password provided."
       redirect_to login_user_path
     end
   end

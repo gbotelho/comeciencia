@@ -265,9 +265,19 @@ class DietsController < ApplicationController
 
 	def personalize
 		@person = Person.find(params[:id_person])
-		createDiet(@person)
+		base_diet = Diet.find(params[:id_diet])
+		#createDiet(@person)
 		@diet = @person.diets.first
-		
+		@diet.meals.clear
+		@diet.meals << base_diet.meals
+		@diet.meals.each do |meal|
+			calculateMealProperties(meal)
+			meal.save
+		end
+		calculateDietProperties(@diet)
+		@diet.save
+		redirect_to edit_diet_path(@diet)
+
 		# @foods_person = @person.foods
 		# @foods_breakfast_fats = @foods_person.select{ |item| ((item[:breakfast] == true) && (item[:high_fat] == true))}
 		# @foods_lunch_fats = @foods_person.select{ |item| ((item[:lunch] == true) && (item[:high_fat] == true))}
@@ -449,7 +459,7 @@ class DietsController < ApplicationController
 		# @diet.meals << @meal_dinner
 
 
-		render 'show'
+		#render 'show'
 	end
 
 	private

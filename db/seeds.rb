@@ -129,7 +129,7 @@ frutas = [maca, pera, morango]
 frutas_vermelhas = [morango]
 folhas_verdes = [alface]
 vegetais = [alface, cenoura]
-cereais_integrais = [pao_integral, aveia, arroz_integral]
+cereais_integrais = [pao_integral, aveia, arroz_integral, macarrao_integral]
 peixes = [salmao, atum]
 proteinas_magras = [salmao, atum, frango, ovo, bife_file_mignon]
 laticinios_baixa_gordura = [iogurte_desnatado, leite_desnatado]
@@ -137,7 +137,15 @@ laticinios_integrais = []
 castanhas = [castanhas_de_caju, pasta_de_amendoim]
 feijoes = [feijao_preto]
 
-Diet.create(name: "DASH", 
+def createMeal (name, foods)
+	meal = Meal.create(name: name)
+	foods.each do |food|
+		meal.portions.push(Portion.create(food: food, size: food.size))
+	end
+	return meal
+end
+
+dash_diet = Diet.create(name: "DASH", 
 			goal: "Prevenir e tratar hipertensão",
 			description: "Chamada de DASH Diet, tem como objetivo prevenir e tratar a hipertensão.\n\nA dieta DASH foi considerada "\
 				"por médicos americanos como a mais adequada para beneficiar o corpo de diferentes maneiras, já que também promove "\
@@ -145,15 +153,20 @@ Diet.create(name: "DASH",
 				"como potássio, proteína, fibra e cálcio – encontrados em vegetais e alimentos integrais – e evitar aqueles que aumentam "\
 				"a pressão arterial, especialmente os ricos em sal, calorias e gordura, como os industrializados, doces e carne vermelha.",
 			image: File.new("#{Rails.root}/app/assets/images/dieta-dash.jpg")
-			).foods.push(
-			frutas,
-			vegetais,
-			cereais_integrais,
-			proteinas_magras,
-			laticinios_baixa_gordura
 			)
+dash_diet.foods.push(
+	frutas,
+	vegetais,
+	cereais_integrais,
+	proteinas_magras,
+	laticinios_baixa_gordura
+)
+dash_diet.meals.push(createMeal("Cafe da Manha", [aveia, maca, iogurte_desnatado]))
+dash_diet.meals.push(createMeal("Almoco", [alface, frango, arroz_integral]))
+dash_diet.meals.push(createMeal("Lanche", [leite_desnatado, morango, pao_integral]))
+dash_diet.meals.push(createMeal("Jantar", [cenoura, atum, macarrao_integral]))
 
-Diet.create(name: "MIND", 
+mind_diet = Diet.create(name: "MIND", 
 			goal: "Prevenir Alzheimer",
 			description: "O plano tem como objetivo prevenir o Alzheimer com alimentos benéficos para o cérebro.\n\nA dieta MIND "\
 				"(sigla de Mediterranean-DASH Intervention for Neurodegenerative Delay, em tradução livre, foi desenvolvida a partir "\
@@ -161,20 +174,25 @@ Diet.create(name: "MIND",
 				"nas duas dietas, que são benéficos para a saúde cerebral: folhas verdes, vegetais, nozes, frutas, grãos, cereais integrais, "\
 				"peixe, aves, azeite e vinho.",
 			image: File.new("#{Rails.root}/app/assets/images/dieta-mind.jpg")
-			).foods.push(
-			folhas_verdes,
-			vegetais,
-			castanhas,
-			frutas_vermelhas,
-			feijoes,
-			cereais_integrais,
-			peixes,
-			frango,
-			azeite,
-			vinho
 			)
+mind_diet.foods.push(
+	folhas_verdes,
+	vegetais,
+	castanhas,
+	frutas_vermelhas,
+	feijoes,
+	cereais_integrais,
+	peixes,
+	frango,
+	azeite,
+	vinho
+)
+mind_diet.meals.push(createMeal("Cafe da Manha", [cookies_de_aveia, pasta_de_amendoim, morango]))
+mind_diet.meals.push(createMeal("Almoco", [alface, frango, arroz_integral, feijao_preto]))
+mind_diet.meals.push(createMeal("Lanche", [cenoura, atum, pao_integral, castanhas_de_caju]))
+mind_diet.meals.push(createMeal("Jantar", [salmao, macarrao_integral, vinho, azeite]))
 
-Diet.create(name: "TLC", 
+tlc_diet = Diet.create(name: "TLC", 
 			goal: "Diminuir o colesterol ruim (LDL)",
 			description: "Conhecido como dieta TLC (sigla para “terapia para mudança do estilo de vida”), o plano tem como principal "\
 				"objetivo reduzir a taxa de LDL, o “colesterol ruim”, prevenindo doenças cardiovasculares.\n\nO foco desse tipo de alimentação "\
@@ -183,34 +201,44 @@ Diet.create(name: "TLC",
 				"consumidas ao longo do dia.\n\nA dieta ainda prevê a ingestão de fibras, presentes nos vegetais e alimentos integrais, que também "\
 				"contribuem com o combate ao colesterol alto.",
 			image: File.new("#{Rails.root}/app/assets/images/dieta-tlc.jpg")
-			).foods.push(
-			frutas,
-			vegetais,
-			cereais_integrais,
-			laticinios_baixa_gordura,
-			peixes,
-			frango
 			)
+tlc_diet.foods.push(
+	frutas,
+	vegetais,
+	cereais_integrais,
+	laticinios_baixa_gordura,
+	peixes,
+	frango
+)
+tlc_diet.meals.push(createMeal("Cafe da Manha", [aveia, maca, iogurte_desnatado]))
+tlc_diet.meals.push(createMeal("Almoco", [alface, frango, arroz_integral]))
+tlc_diet.meals.push(createMeal("Lanche", [leite_desnatado, morango, cookies_de_aveia]))
+tlc_diet.meals.push(createMeal("Jantar", [salmao, macarrao_integral, cenoura]))
 
-Diet.create(name: "Dieta da Fertilidade", 
+fertility_diet = Diet.create(name: "Dieta da Fertilidade", 
 			goal: "Aumentar a ovulação",
 			description: "A dieta da fertilidade tem como objetivo aumentar a ovulação. É para mulheres, portanto.\n\nCriado por pesquisadores "\
 				"de Harvard, o plano alimentar prioriza a ingestão de gordura “boa”, grãos integrais, proteínas, óleos de origem vegetal e "\
 				"laticínios integrais e evita o consumo de gordura “ruim”, carboidratos refinados e carne vermelha. ",
 			image: File.new("#{Rails.root}/app/assets/images/dieta-da-fertilidade.jpg")
-			).foods.push(
-			frutas,
-			azeite,
-			vegetais,
-			cereais_integrais,
-			peixes,
-			ovo,
-			feijoes,
-			castanhas,
-			laticinios_integrais
 			)
+fertility_diet.foods.push(
+	frutas,
+	azeite,
+	vegetais,
+	cereais_integrais,
+	peixes,
+	ovo,
+	feijoes,
+	castanhas,
+	laticinios_integrais
+)
+fertility_diet.meals.push(createMeal("Cafe da Manha", [maca, ovo, pao_integral, castanhas_de_caju]))
+fertility_diet.meals.push(createMeal("Almoco", [alface, frango, arroz_integral, feijao_preto]))
+fertility_diet.meals.push(createMeal("Lanche", [pasta_de_amendoim, morango, cookies_de_aveia]))
+fertility_diet.meals.push(createMeal("Jantar", [salmao, macarrao_integral, cenoura]))
 
-Diet.create(name: "Dieta da Clínica Mayo", 
+mayo_diet = Diet.create(name: "Dieta da Clínica Mayo", 
 			goal: "Emagrecer",
 			description: "O regime foi desenvolvido pela Clínica Mayo, instituição dos Estados Unidos que realiza pesquisas na área da saúde e "\
 					"oferece recomendações sobre prevenção de doenças. O objetivo é emagrecer. Os criadores afirmam que ela resulta na perda de 2,5 "\
@@ -220,18 +248,23 @@ Diet.create(name: "Dieta da Clínica Mayo",
 					"gorduras, mas nas quantidades indicadas pela pirâmide alimentar. Estudos já demonstraram que a dieta é eficaz na perda de peso "\
 					"e ajuda a proteger a saúde cardiovascular. Exercícios também estão incluídos -- de 30 minutos a 60 minutos diariamente.",
 			image: File.new("#{Rails.root}/app/assets/images/dieta-mayo.jpg")
-			).foods.push(
-			frutas,
-			vegetais,
-			cereais_integrais,
-			castanhas,
-			feijoes,
-			salmao,
-			atum,
-			azeite
 			)
+mayo_diet.foods.push(
+	frutas,
+	vegetais,
+	cereais_integrais,
+	castanhas,
+	feijoes,
+	salmao,
+	atum,
+	azeite
+)
+mayo_diet.meals.push(createMeal("Cafe da Manha", [maca, pao_integral, pasta_de_amendoim]))
+mayo_diet.meals.push(createMeal("Almoco", [alface, salmao, arroz_integral, feijao_preto]))
+mayo_diet.meals.push(createMeal("Lanche", [pasta_de_amendoim, morango, cookies_de_aveia]))
+mayo_diet.meals.push(createMeal("Jantar", [atum, macarrao_integral, cenoura]))
 
-Diet.create(name: "Mediterrânea", 
+mediterranean_diet = Diet.create(name: "Mediterrânea", 
 			goal: "Emagrecer e prevenir doencas cronicas",
 			description: "A Dieta do Mediterrâneo se baseia na alimentação seguida por habitantes de países banhados pelo Mar Mediterrâneo.\n\n"\
 					"O programa tem como objetivo a perda e a manutenção do peso e a prevenção de doenças crônicas com a baixa ingestão de carne "\
@@ -239,31 +272,41 @@ Diet.create(name: "Mediterrânea",
 					"vegetais, grãos integrais, azeite de oliva e peixe. O vinho tinto também é indicado, com moderação.\n\nRequer a prática de "\
 					"exercícios leves, ao menos três vezes por semana, como caminhadas e a prática da jardinagem. ",
 			image: File.new("#{Rails.root}/app/assets/images/dieta-mediterranea.jpg")
-			).foods.push(
-			frutas,
-			vegetais,
-			cereais_integrais,
-			castanhas,
-			feijoes,
-			azeite,
-			peixes,
-			ovo,
-			laticinios_integrais,
-			vinho
 			)
+mediterranean_diet.foods.push(
+	frutas,
+	vegetais,
+	cereais_integrais,
+	castanhas,
+	feijoes,
+	azeite,
+	peixes,
+	ovo,
+	laticinios_integrais,
+	vinho
+)
+mediterranean_diet.meals.push(createMeal("Cafe da Manha", [maca, pao_integral, ovo, castanhas_de_caju]))
+mediterranean_diet.meals.push(createMeal("Almoco", [alface, salmao, arroz_integral, feijao_preto]))
+mediterranean_diet.meals.push(createMeal("Lanche", [pasta_de_amendoim, morango, cookies_de_aveia]))
+mediterranean_diet.meals.push(createMeal("Jantar", [atum, macarrao_integral, cenoura, vinho]))
 
-Diet.create(name: "Dieta Vigilantes do Peso", 
+weight_watchers_diet = Diet.create(name: "Dieta Vigilantes do Peso", 
 			goal: "Emagrecer",
 			description: "O Vigilantes do Peso faz parte da organização Weight Watchers, que surgiu nos Estados Unidos e ajuda na peso por "\
 					"meio de programas pagos de emagrecimento.\n\nOs participantes se inscrevem em um dos métodos disponíveis que consistem em "\
 					"reuniões de acompanhamento, sugestão de cardápios e receitas saudáveis com base no controle da quantidade de calorias "\
 					"consumidas diariamente",
 			image: File.new("#{Rails.root}/app/assets/images/dieta-vigilantes-do-peso.jpg")
-			).foods.push(
-			 Food.all
-			)		
+			)
+weight_watchers_diet.foods.push(
+	Food.all
+)
+weight_watchers_diet.meals.push(createMeal("Cafe da Manha", [maca, leite_desnatado, pao_integral, ovo]))
+weight_watchers_diet.meals.push(createMeal("Almoco", [alface, salmao, arroz_integral, feijao_preto]))
+weight_watchers_diet.meals.push(createMeal("Lanche", [leite_desnatado, morango, cookies_de_aveia]))
+weight_watchers_diet.meals.push(createMeal("Jantar", [atum, macarrao_integral, cenoura]))
 
-Diet.create(name: "Dieta Flexitariana", 
+flexitarian_diet = Diet.create(name: "Dieta Flexitariana", 
 			goal: "Perda de peso e a melhora da saúde",
 			description: "É um programa alimentar que objetiva a perda de peso e a melhora da saúde por meio de dois conceitos: flexibilidade "\
 					"e vegetarianismo.\n\nO termo foi usado pela primeira vez em 2009 pela nutricionista Americana Dawn Jackson Blatner. Segundo "\
@@ -275,18 +318,24 @@ Diet.create(name: "Dieta Flexitariana",
 					"exercícios intensos, cinco vezes por semana.\n\nEstudos mostraram que os adeptos perdem 15% do peso corporal, além de reduzir "\
 					"risco de doenças cardíacas, diabetes e câncer e vivem, em média, 3,6 anos mais em relação aos que não seguem o programa. ",
 			image: File.new("#{Rails.root}/app/assets/images/dieta-flexitariana.jpg")
-			).foods.push(
-			castanhas,
-			semente_de_girassol,
-			feijoes,
-			ovo,
-			frutas,
-			vegetais,
-			laticinios_integrais,
-			laticinios_baixa_gordura
-			)	
+			)
+flexitarian_diet.foods.push(
+	castanhas,
+	semente_de_girassol,
+	feijoes,
+	ovo,
+	frutas,
+	vegetais,
+	laticinios_integrais,
+	laticinios_baixa_gordura,
+	cereais_integrais,
+)	
+flexitarian_diet.meals.push(createMeal("Cafe da Manha", [maca, pao_integral, pasta_de_amendoim]))
+flexitarian_diet.meals.push(createMeal("Almoco", [alface, ovo, arroz_integral, feijao_preto]))
+flexitarian_diet.meals.push(createMeal("Lanche", [iogurte_desnatado, morango, castanhas_de_caju]))
+flexitarian_diet.meals.push(createMeal("Jantar", [macarrao_integral, cenoura, semente_de_girassol]))
 
-Diet.create(name: "Dieta Volumétrica", 
+volumetrics_diet = Diet.create(name: "Dieta Volumétrica", 
 			goal: "Emagrecer",
 			description: "O conceito da dieta volumétrica consiste em estimular o consumo de alimentos pouco calóricos que promovem a saciedade.\n\n"\
 					"Eles são divididos em categorias: os chamados de baixíssima densidade, como frutas (figo, melancia, meão, uva, laranja e "\
@@ -298,6 +347,11 @@ Diet.create(name: "Dieta Volumétrica",
 					"e da categoria 4, evitado.\n\nEmbora esta dieta seja mais um plano alimentar do que um programa de emagrecimento, para aqueles que "\
 					"querem um resultado melhor, a prática de exercícios – 30 minutos de caminhada na maior parte da semana – é encorajada. ",
 			image: File.new("#{Rails.root}/app/assets/images/missing.jpg")
-			).foods.push(
-			 Food.all
-			)	
+			)
+volumetrics_diet.foods.push(
+	Food.all
+)	
+volumetrics_diet.meals.push(createMeal("Cafe da Manha", [morango, leite_desnatado, pao_integral, ovo]))
+volumetrics_diet.meals.push(createMeal("Almoco", [alface, frango, arroz_integral, feijao_preto]))
+volumetrics_diet.meals.push(createMeal("Lanche", [iogurte_desnatado, maca, cookies_de_aveia]))
+volumetrics_diet.meals.push(createMeal("Jantar", [macarrao_integral, cenoura, atum]))
