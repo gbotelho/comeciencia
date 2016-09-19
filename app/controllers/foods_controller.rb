@@ -16,7 +16,7 @@ class FoodsController < ApplicationController
 		@foods_evaluated = @person.foods
 		@foods_non_evaluated = @foods - @foods_evaluated
 		if @foods_non_evaluated.size > 0
-			@food = @foods_non_evaluated.sample
+			@food = @foods_non_evaluated.first
 			@person.foods << @food
 			person_food = FoodsPerson.find_by_food_id_and_person_id(@food.id,@person.id)
 			person_food.like = false

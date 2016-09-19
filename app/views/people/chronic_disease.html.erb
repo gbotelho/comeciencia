@@ -1,0 +1,20 @@
+<%= form_for @person, url: add_chronic_disease_person_path(@person), method: :POST   do |f| %>
+	<div class="row">
+		<div class="large-12 columns">
+			<h4> <center>Você sofre de alguma das seguintes doencas?</center></h4>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="large-12 columns">
+			<center><%=f.collection_check_boxes :disease_ids, Disease.all, :id, :name%></center>
+		</div>
+	</div>
+	<div class="row">
+	    <div class="large-12 columns">
+	      <div class="clearfix">
+	          <button class="small button right" name="submit" value="descobrir" type="submit">Descobrir minha dieta</button>
+	      </div>
+	    </div>
+  	</div>
+<%end%>

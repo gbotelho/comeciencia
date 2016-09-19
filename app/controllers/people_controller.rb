@@ -27,7 +27,8 @@ class PeopleController < ApplicationController
 			if params[:submit] == 'montar'
 		        redirect_to edit_diet_path(@person.diets.first)
 		    elsif params[:submit] == 'descobrir'
-		        redirect_to list_one_food_path(@person)
+		        #redirect_to list_one_food_path(@person)
+		        redirect_to chronic_disease_person_path(@person)
 		    end
 		else
 			render 'new'
@@ -51,9 +52,30 @@ class PeopleController < ApplicationController
 	  redirect_to people_path
 	end
 
+	def chronic_disease
+		@person = Person.find(params[:id_person])
+	end
+
+	def add_chronic_disease
+		@person = Person.find(params[:id_person])
+		if @person.update(person_chronic_disease_params)
+			if (@person.diseases.size > 0)
+				redirect_to list_chronic_disease_diet_path(@person)
+			else
+	    		redirect_to list_one_food_path(@person)
+	    	end
+		else
+			render 'chronic_disease'
+		end
+	end
+
     private
 	  def person_params
 	    params.require(:person).permit(:name, :height, :weight, :age, :sex, user_attributes: [:email, :password, :password_confirmation, :encrypted_password], diets_attributes: [:id, :goal])
+	  end
+
+	  def person_chronic_disease_params
+	    params[:person].permit(disease_ids:[])
 	  end
 
 	  def person_params_new

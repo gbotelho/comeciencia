@@ -6,6 +6,11 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+hipertensao = Disease.create(name: "Hipertensao")
+alzheimer = Disease.create(name: "Alzheimer")
+colesterol = Disease.create(name: "Colesterol")
+ovulacao = Disease.create(name: "Baixa ovulacao (somente mulheres)")
+
 pao_integral = Food.create(name: "pão integral", calories: 68,
 	carbohydrate: 12.27, protein: 2.37, fat: 1.07, size: 26, unit: "g",
 	breakfast: true, lunch: true, dinner: true, snack: true, 
@@ -146,7 +151,7 @@ def createMeal (name, foods)
 end
 
 dash_diet = Diet.create(name: "DASH", 
-			goal: "Prevenir e tratar hipertensão",
+			goal: hipertensao.name,
 			description: "Chamada de DASH Diet, tem como objetivo prevenir e tratar a hipertensão.\n\nA dieta DASH foi considerada "\
 				"por médicos americanos como a mais adequada para beneficiar o corpo de diferentes maneiras, já que também promove "\
 				"perda de peso e estimula uma alimentação mais nutritiva.\n\nA ideia é simples: enfatizar nutrientes que previnem a hipertensão, "\
@@ -167,7 +172,7 @@ dash_diet.meals.push(createMeal("Lanche", [leite_desnatado, morango, pao_integra
 dash_diet.meals.push(createMeal("Jantar", [cenoura, atum, macarrao_integral]))
 
 mind_diet = Diet.create(name: "MIND", 
-			goal: "Prevenir Alzheimer",
+			goal: alzheimer.name,
 			description: "O plano tem como objetivo prevenir o Alzheimer com alimentos benéficos para o cérebro.\n\nA dieta MIND "\
 				"(sigla de Mediterranean-DASH Intervention for Neurodegenerative Delay, em tradução livre, foi desenvolvida a partir "\
 				"da união entre o regime DASH e a mediterrânea. Sendo assim, o programa prioriza o consumo de 10 alimentos presentes "\
@@ -193,7 +198,7 @@ mind_diet.meals.push(createMeal("Lanche", [cenoura, atum, pao_integral, castanha
 mind_diet.meals.push(createMeal("Jantar", [salmao, macarrao_integral, vinho, azeite]))
 
 tlc_diet = Diet.create(name: "TLC", 
-			goal: "Diminuir o colesterol ruim (LDL)",
+			goal: colesterol.name,
 			description: "Conhecido como dieta TLC (sigla para “terapia para mudança do estilo de vida”), o plano tem como principal "\
 				"objetivo reduzir a taxa de LDL, o “colesterol ruim”, prevenindo doenças cardiovasculares.\n\nO foco desse tipo de alimentação "\
 				"é diminuir significativamente o consumo de gordura, principalmente a saturada, encontrada nas carnes mais gordurosas, "\
@@ -216,7 +221,7 @@ tlc_diet.meals.push(createMeal("Lanche", [leite_desnatado, morango, cookies_de_a
 tlc_diet.meals.push(createMeal("Jantar", [salmao, macarrao_integral, cenoura]))
 
 fertility_diet = Diet.create(name: "Dieta da Fertilidade", 
-			goal: "Aumentar a ovulação",
+			goal:ovulacao.name,
 			description: "A dieta da fertilidade tem como objetivo aumentar a ovulação. É para mulheres, portanto.\n\nCriado por pesquisadores "\
 				"de Harvard, o plano alimentar prioriza a ingestão de gordura “boa”, grãos integrais, proteínas, óleos de origem vegetal e "\
 				"laticínios integrais e evita o consumo de gordura “ruim”, carboidratos refinados e carne vermelha. ",
@@ -239,7 +244,7 @@ fertility_diet.meals.push(createMeal("Lanche", [pasta_de_amendoim, morango, cook
 fertility_diet.meals.push(createMeal("Jantar", [salmao, macarrao_integral, cenoura]))
 
 mayo_diet = Diet.create(name: "Dieta da Clínica Mayo", 
-			goal: "Emagrecer",
+			goal: "emagrecimento",
 			description: "O regime foi desenvolvido pela Clínica Mayo, instituição dos Estados Unidos que realiza pesquisas na área da saúde e "\
 					"oferece recomendações sobre prevenção de doenças. O objetivo é emagrecer. Os criadores afirmam que ela resulta na perda de 2,5 "\
 					"e 4,5 quilos nos primeiros quinze dias e, depois, de 0,5 a 1 quilo por semana.\n\nA dieta se baseia na adoção ou eliminação de "\
@@ -265,7 +270,7 @@ mayo_diet.meals.push(createMeal("Lanche", [pasta_de_amendoim, morango, cookies_d
 mayo_diet.meals.push(createMeal("Jantar", [atum, macarrao_integral, cenoura]))
 
 mediterranean_diet = Diet.create(name: "Mediterrânea", 
-			goal: "Emagrecer e prevenir doencas cronicas",
+			goal: "cronicas",
 			description: "A Dieta do Mediterrâneo se baseia na alimentação seguida por habitantes de países banhados pelo Mar Mediterrâneo.\n\n"\
 					"O programa tem como objetivo a perda e a manutenção do peso e a prevenção de doenças crônicas com a baixa ingestão de carne "\
 					"vermelha, açúcar e gordura saturada.\n\nPor outro lado, o plano prevê um maior consumo de alimentos como nozes e castanhas, "\
@@ -291,7 +296,7 @@ mediterranean_diet.meals.push(createMeal("Lanche", [pasta_de_amendoim, morango, 
 mediterranean_diet.meals.push(createMeal("Jantar", [atum, macarrao_integral, cenoura, vinho]))
 
 weight_watchers_diet = Diet.create(name: "Dieta Vigilantes do Peso", 
-			goal: "Emagrecer",
+			goal: "emagrecimento",
 			description: "O Vigilantes do Peso faz parte da organização Weight Watchers, que surgiu nos Estados Unidos e ajuda na peso por "\
 					"meio de programas pagos de emagrecimento.\n\nOs participantes se inscrevem em um dos métodos disponíveis que consistem em "\
 					"reuniões de acompanhamento, sugestão de cardápios e receitas saudáveis com base no controle da quantidade de calorias "\
@@ -307,7 +312,7 @@ weight_watchers_diet.meals.push(createMeal("Lanche", [leite_desnatado, morango, 
 weight_watchers_diet.meals.push(createMeal("Jantar", [atum, macarrao_integral, cenoura]))
 
 flexitarian_diet = Diet.create(name: "Dieta Flexitariana", 
-			goal: "Perda de peso e a melhora da saúde",
+			goal: "emagrecimento",
 			description: "É um programa alimentar que objetiva a perda de peso e a melhora da saúde por meio de dois conceitos: flexibilidade "\
 					"e vegetarianismo.\n\nO termo foi usado pela primeira vez em 2009 pela nutricionista Americana Dawn Jackson Blatner. Segundo "\
 					"a especialista, não seria necessário eliminar completamente o consumo de carne para alcançar os benefícios do vegetarianismo. "\
@@ -336,7 +341,7 @@ flexitarian_diet.meals.push(createMeal("Lanche", [iogurte_desnatado, morango, ca
 flexitarian_diet.meals.push(createMeal("Jantar", [macarrao_integral, cenoura, semente_de_girassol]))
 
 volumetrics_diet = Diet.create(name: "Dieta Volumétrica", 
-			goal: "Emagrecer",
+			goal: "emagrecimento",
 			description: "O conceito da dieta volumétrica consiste em estimular o consumo de alimentos pouco calóricos que promovem a saciedade.\n\n"\
 					"Eles são divididos em categorias: os chamados de baixíssima densidade, como frutas (figo, melancia, meão, uva, laranja e "\
 					"frutas vermelhas), e vegetais (folhas verdes, cenoura, beterraba, abóbora, berinjela) sem amido, leite desnatado e sopa à "\

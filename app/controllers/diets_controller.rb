@@ -136,8 +136,17 @@ class DietsController < ApplicationController
 
 	def discover
 		@person = Person.find(params[:id_person])
-		@foods_person = @person.foods
-		@diets = Diet.all
+		@foods_person = @person.foods.select{|food| FoodsPerson.find_by_food_id_and_person_id(food.id,@person.id).like == true} 
+		
+		if (@person.diets.first.goal == "lose_weight")
+			@diets = Diet.all.select {|diet| diet.goal == "emagrecimento"} 
+		else
+			@diets = Diet.all
+		end
+
+		if(@person.sex != "female")
+			@diets.delete(Diet.find(goal: "ovulacao"))
+		end
 
 		intersections = @diets.map { |diet| diet.foods.size > 0 ? (diet.foods & @foods_person).size / diet.foods.size.to_f : 0} 
 		index_max = intersections.index(intersections.max)
@@ -460,6 +469,12 @@ class DietsController < ApplicationController
 
 
 		#render 'show'
+	end
+
+	def list_chronic_disease
+		@person = Person.find(params[:id_person])
+		@diets = Diet.all
+		@selected_diets = @diets.select {|diet| @person.diseases.map { |disease| disease.name}.include?(diet.goal)}
 	end
 
 	private

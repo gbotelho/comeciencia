@@ -1,0 +1,50 @@
+<div class="row">
+	<div class="large-12 columns">
+	  <div class="clearfix">
+	  	<center>
+	      <h5>As seguintes dietas sao interessantes para voce. Selecione uma delas para utilizar como base:</h5>
+	    </center>
+	  </div>
+	</div>
+</div>
+
+<ul class="accordion" data-accordion>
+	<%@selected_diets.each do |diet| %>
+	  <li class="accordion-navigation">
+	    <a href="#<%="panel_" + diet.id.to_s%>"><%=diet.name%></a>
+	    <div id="<%="panel_" + diet.id.to_s%>" class="content active">
+	      <div class="row">
+			<div class="row">
+				<div class="large-12 columns">
+				  <div class="clearfix">
+				  	<center>
+				      <%= image_tag diet.image.url %>
+				    </center>
+				  </div>
+				</div>
+			</div>
+			 
+			 <div class="row marginTop50">
+				<div class="large-12 columns">
+				  <div class="clearfix">
+				  	<center>
+				      <p class="text-center"><%= simple_format(diet.description)%></p>
+				    </center>
+				  </div>
+				</div>
+			</div>
+
+			  <div class="row">
+			    <div class="large-12 columns">
+			      <div class="clearfix">
+			      	<center>
+						<h5><%= link_to 'Veja uma sugestão de dieta para você', personalize_diet_path(@person, diet), {class:"small button", style: "color:#FFFFFF;"} %></h5>
+					</center>
+			      </div>
+			    </div>
+			  </div>
+	    </div>
+	  </li>
+  	<%end%>
+</ul>
+
