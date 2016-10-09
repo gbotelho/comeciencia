@@ -6,6 +6,8 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+admin_gabi = User.create(email: "gabriela.cbotelho@gmail.com", user_type: "admin", password: "afelicidadeeocaminho")
+
 hipertensao = Disease.create(name: "Hipertensao")
 alzheimer = Disease.create(name: "Alzheimer")
 colesterol = Disease.create(name: "Colesterol")

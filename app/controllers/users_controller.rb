@@ -66,7 +66,11 @@ class UsersController < ApplicationController
     if @user
       flash[:notice] = "You've been logged in."
       session[:user_id] = @user.id
-      redirect_to edit_diet_path(@user.person.diets.first)
+      if @user.user_type != nil && @user.user_type = "admin"
+        redirect_to articles_path
+      else
+        redirect_to edit_diet_path(@user.person.diets.first)
+      end
     else
       flash[:alert] = "There was a problem logging you in. Verify the email and password provided."
       redirect_to login_user_path
@@ -75,6 +79,12 @@ class UsersController < ApplicationController
 
   def login
 
+  end
+
+  def logout
+    @current_user = nil
+    session[:user_id] = nil
+    redirect_to articles_path
   end
 
   private

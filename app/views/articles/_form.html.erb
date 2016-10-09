@@ -14,18 +14,45 @@
     </div>
   <% end %>
  
-  <p>
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </p>
- 
-  <p>
-    <%= f.label :text %><br>
-    <%= f.text_area :text %>
-  </p>
- 
-  <p>
-    <%= f.submit %>
-  </p>
+   <div class="row">
+    <div class="large-12 columns">
+      <div class="row collapse">
+        <%= f.label :title, "TÍTULO" %>
+        <div class="small-12 columns">
+          <%= f.text_field :title , placeholder: "Post sobre Yoga", required: true  %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+   <div class="row">
+    <div class="large-12 columns">
+      <div class="row collapse">
+        <%= f.label :image, "IMAGEM DO POST" %>
+        <div class="small-12 columns">
+          <%= f.file_field :image, class: 'form-control'%>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+   <div class="row">
+    <div class="large-12 columns">
+      <div class="row collapse">
+        <%= f.label :image, "IMAGEM DO POST" %>
+        <div class="small-12 columns">
+          <%= f.text_area :text , placeholder: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",  cols: 20, rows: 30, required: true  %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <div class="clearfix">
+          <button class="small button right" name="submit" value="submit" type="submit">PUBLICAR</button>
+      </div>
+    </div>
+  </div>
  
 <% end %>

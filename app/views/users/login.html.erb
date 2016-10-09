@@ -1,31 +1,62 @@
-<div class="large-3 large-centered columns">
-  <div class="login-box">
-  <div class="row">
-  <div class="large-12 columns">
-     <div class="row">
-     	<div class="large-12 columns">
-        	<%= flash[:alert] %>
-  			<%= flash[:notice] %>
-    	</div>
-   	</div>
-    <%=form_tag login_user_path do%>
-       <div class="row">
-         <div class="large-12 columns">
-             <input type="text" name="email" placeholder="Email" />
-         </div>
-       </div>
+<div class="row">
+  <div class="large-6 columns">
+    <div class="login-box primary">
       <div class="row">
-         <div class="large-12 columns">
-             <input type="password" name="password" placeholder="Password" />
-         </div>
-      </div>
-      <div class="row">
-        <div class="large-12 large-centered columns">
-          <input type="submit" class="button expand" value="Log In"/>
+        <div class="large-12 columns">
+           <div class="row">
+           	<div class="large-12 columns">
+              	<%= flash[:alert] %>
+        			<%= flash[:notice] %>
+          	</div>
+         	</div>
+          <h3 class="center">LOGIN</h3>
+          <%=form_tag login_user_path do%>
+             <div class="row">
+               <div class="large-12 columns">
+                   <input type="text" name="email" placeholder="Email" />
+               </div>
+             </div>
+            <div class="row">
+               <div class="large-12 columns">
+                   <input type="password" name="password" placeholder="Password" />
+               </div>
+            </div>
+            <div class="row">
+              <div class="large-12 large-centered columns">
+                <input type="submit" class="button expand" value="Log In"/>
+              </div>
+            </div>
+            <div class="row">
+              <div class="large-12 large-centered columns">
+                <%= link_to 'Esqueceu sua senha?', new_person_path, {style: "color: blue"}%>
+              </div>
+            </div>
+          <%end%>
         </div>
       </div>
-    <%end%>
+    </div>
   </div>
-</div>
-</div>
+  <div class="large-6 columns">
+   <div class="login-box primary">
+      <div class="row">
+        <div class="large-12 columns">
+           <div class="row">
+            <div class="large-12 columns">
+                <%= flash[:alert] %>
+              <%= flash[:notice] %>
+            </div>
+          </div>
+          <h3 class="center">CADASTRE-SE</h3>
+          <div class="large-8 large-centered columns">
+            <p class="center">Crie uma conta e tenha acesso a conteúdo exclusivo =)</p>
+          </div>
+           <div class="row">
+             <div class="large-12 large-centered columns">
+                  <%= link_to 'REGISTRE-SE COM SEU E-MAIL', new_person_path, {class:"small button", style: "color:#FFFFFF;"}%>
+             </div>
+           </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
