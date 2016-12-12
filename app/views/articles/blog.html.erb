@@ -11,8 +11,8 @@
   <% @articles.each do |article| %>
   <div class="blog-post">
     <h3><%= article.title %> </h3>
-    <img class="thumbnail" src="http://placehold.it/850x350">
-    <p><%= article.text %></p>
+    <%= image_tag(article.image.url(:extralarge) , class: 'media-object') %>
+    <p><%= simple_format(article.text.truncate_words(1, separator: '</p>')) %></p>
     <div class="row" >
       <div class="large-12 columns">
         <%= link_to 'Ler mais', article_path(article), {class:"small button", style: "color:#FFFFFF;"} %>
@@ -31,7 +31,7 @@
       </div>
       <div class="row" >
         <div class="large-12 columns">
-          <a href="#"><%= article.comments.count %> Comentários</a>
+          <%= link_to "#{article.comments.count} Comentários", article_path(article, anchor: "comments")%>
         </div>
       </div>
     </div>

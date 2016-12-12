@@ -39,9 +39,9 @@
    <div class="row">
     <div class="large-12 columns">
       <div class="row collapse">
-        <%= f.label :image, "IMAGEM DO POST" %>
+        <%= f.label :text, "TEXTO DO POST" %>
         <div class="small-12 columns">
-          <%= f.text_area :text , placeholder: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",  cols: 20, rows: 30, required: true  %>
+          <%= f.text_area :text, class: "tinymce", placeholder: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", cols: 20, rows: 20  %>
         </div>
       </div>
     </div>
@@ -56,3 +56,16 @@
   </div>
  
 <% end %>
+
+<%= tinymce force_p_newline: false, force_br_newlines: false, forced_root_block: false, convert_newlines_to_brs: false, remove_linebreaks: true%>
+
+<script type="text/javascript">
+  tinyMCE.init({
+    force_p_newlines : false,
+    force_br_newlines : false,
+    forced_root_block : false,
+    convert_newlines_to_brs: false,
+    // Not to add br elements.
+    remove_linebreaks : true, 
+  });
+</script>

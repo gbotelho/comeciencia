@@ -15,7 +15,8 @@
       <%if @current_user != nil && @current_user.user_type == "admin" %>
         <li><%= link_to 'ADMIN', articles_path%></li>
       <%end%>
-      <li><%= link_to 'HOME', article_blog_path%></li>
+      <li><%= link_to 'RECEITAS', article_blog_path%></li>
+      <li><%= link_to 'PROPRIEDADES DOS ALIMENTOS', article_blog_path%></li>
       <li><%= link_to 'BLOG', article_blog_path%></li>
       <li><a href="#">SOBRE</a></li>
     </ul>
@@ -34,11 +35,11 @@
       </li>
       <% if @current_user != nil %>
         <% if @current_user.person != nil && @current_user.person.diets != nil %>
-          <li><%= link_to 'MINHA CONTA', edit_diet_path(@current_user.person.diets.first)%></li>
+          <li><%= link_to 'MINHA DIETA PESONALIZADA', edit_diet_path(@current_user.person.diets.first)%></li>
         <%end%>
         <li><%= link_to 'LOGOUT', logout_user_path%></li>
       <% else %>
-        <li><%= link_to 'LOGIN', login_user_path%></li>
+        <li><%= link_to 'MINHA DIETA PERSONALIZADA', login_user_path%></li>
       <% end %>
     </ul>
 

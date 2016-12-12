@@ -16,6 +16,7 @@
 //= require foundation
 //= require turbolinks
 //= require_tree .
+//= require tinymce
 
 $(function(){ $(document).foundation(); });
 
@@ -38,6 +39,7 @@ function alternateName(element, oneName, anotherName) {
         element.text = oneName;
     }
 } 
+
 
 // $(document).ready(function(){
 //   $(document).foundation('reflow');

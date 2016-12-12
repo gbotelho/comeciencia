@@ -1,14 +1,23 @@
-<p>
-  <strong>Commenter:</strong>
-  <%= comment.commenter %>
-</p>
- 
-<p>
-  <strong>Comment:</strong>
-  <%= comment.body %>
-</p>
-<p>
-  <%= link_to 'Destroy Comment', [comment.article, comment],
-               method: :delete,
-               data: { confirm: 'Are you sure?' } %>
-</p>
+<div class="row medium-8 large-7 large-centered columns">
+  <div class="blog-post">
+    <div class="row" >
+      <div class="large-12 columns">
+        <h6>Comentário deixado por <%=comment.commenter%> em <%=comment.created_at != nil ? comment.created_at.strftime("%d-%m-%Y") : ""%> </h6>
+      </div>
+    </div>
+    <div class="row" >
+      <div class="large-12 columns">
+        <p><%=comment.body%></p>
+      </div>
+    </div>
+    <%if @current_user != nil && @current_user.user_type == "admin" %>
+	    <div class="row" >
+	      <div class="large-12 columns">
+	        <%= link_to 'Destroy Comment', [comment.article, comment],{class:"small button", style: "color:#FFFFFF;",
+	               method: :delete,
+	               data: { confirm: 'Are you sure?' }} %>
+	      </div>
+	    </div>
+	<%end%>
+  </div>
+</div>

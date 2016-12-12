@@ -64,7 +64,7 @@ class UsersController < ApplicationController
   def authenticate
     @user = User.authenticate(params[:email], params[:password])
     if @user
-      flash[:notice] = "You've been logged in."
+      # flash[:notice] = "You've been logged in."
       session[:user_id] = @user.id
       if @user.user_type != nil && @user.user_type = "admin"
         redirect_to articles_path
@@ -84,7 +84,7 @@ class UsersController < ApplicationController
   def logout
     @current_user = nil
     session[:user_id] = nil
-    redirect_to articles_path
+    redirect_to article_blog_path
   end
 
   private
