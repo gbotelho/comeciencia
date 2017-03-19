@@ -9,5 +9,5 @@ class Article < ActiveRecord::Base
 					      :extralarge => "1600x900#" }
 	validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 	validates :title, presence: true,
-                    length: { minimum: 5 }
+                    length: { minimum: 1 }
 end

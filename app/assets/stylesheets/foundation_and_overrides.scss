@@ -115,8 +115,11 @@ $include-html-global-classes: $include-html-classes;
 // $jet         : #222222;
 // $black       : #000000;
 
+$customized-color-ocean-blue: #40B5B2;
+$customized-color-ocean-blue-hover: #2A7876;
+
 // We use these as default colors throughout
-// $primary-color: #008CBA;
+$primary-color: $customized-color-ocean-blue;
 // $secondary-color: #e7e7e7;
 // $alert-color: #f04124;
 // $success-color: #43AC6A;
@@ -222,7 +225,7 @@ $include-html-global-classes: $include-html-classes;
 // We use these to control header font sizes
 // $h1-font-size: rem-calc(44);
 // $h2-font-size: rem-calc(37);
-// $h3-font-size: rem-calc(27);
+$h3-font-size: rem-calc(32);
 // $h4-font-size: rem-calc(23);
 // $h5-font-size: rem-calc(18);
 // $h6-font-size: 1rem;
@@ -713,7 +716,7 @@ $include-html-global-classes: $include-html-classes;
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // We use these to style the icon-bar and items
-// $icon-bar-bg: $oil;
+// $icon-bar-bg: $customized-color-ocean-blue;
 // $icon-bar-font-color: $white;
 // $icon-bar-font-color-hover: $icon-bar-font-color;
 // $icon-bar-font-size: 1rem;
@@ -1403,8 +1406,8 @@ $include-html-global-classes: $include-html-classes;
 // $include-html-top-bar-classes: $include-html-classes;
 
 // Background color for the top bar
-// $topbar-bg-color: $oil;
-// $topbar-bg: $topbar-bg-color;
+$topbar-bg-color: $customized-color-ocean-blue;
+$topbar-bg: $topbar-bg-color;
 
 // Height and margin
 // $topbar-height: rem-calc(45);
@@ -1422,9 +1425,9 @@ $include-html-global-classes: $include-html-classes;
 // $topbar-link-weight: $font-weight-normal;
 // $topbar-link-font-size: rem-calc(13);
 // $topbar-link-hover-lightness: -10%; // Darken by 10%
-// $topbar-link-bg: $topbar-bg;
-// $topbar-link-bg-hover: $jet;
-// $topbar-link-bg-color-hover: $charcoal;
+$topbar-link-bg: $topbar-bg;
+$topbar-link-bg-hover: $customized-color-ocean-blue-hover;
+$topbar-link-bg-color-hover: $customized-color-ocean-blue-hover;
 // $topbar-link-bg-active: $primary-color;
 // $topbar-link-bg-active-hover: scale-color($primary-color, $lightness: -14%);
 // $topbar-link-font-family: $body-font-family;
@@ -1436,11 +1439,11 @@ $include-html-global-classes: $include-html-classes;
 // $topbar-button-top: 7px;
 
 // Style the top bar dropdown elements
-// $topbar-dropdown-bg: $oil;
+$topbar-dropdown-bg: $customized-color-ocean-blue;
 // $topbar-dropdown-link-color: $white;
 // $topbar-dropdown-link-color-hover: $topbar-link-color-hover;
-// $topbar-dropdown-link-bg: $oil;
-// $topbar-dropdown-link-bg-hover: $jet;
+$topbar-dropdown-link-bg: $customized-color-ocean-blue;
+$topbar-dropdown-link-bg-hover: $customized-color-ocean-blue-hover;
 // $topbar-dropdown-link-weight: $font-weight-normal;
 // $topbar-dropdown-toggle-size: 5px;
 // $topbar-dropdown-toggle-color: $white;
@@ -1450,7 +1453,7 @@ $include-html-global-classes: $include-html-classes;
 // $topbar-dropdown-label-text-transform: uppercase;
 // $topbar-dropdown-label-font-weight: $font-weight-bold;
 // $topbar-dropdown-label-font-size: rem-calc(10);
-// $topbar-dropdown-label-bg: $oil;
+$topbar-dropdown-label-bg: $customized-color-ocean-blue;
 
 // Top menu icon styles
 // $topbar-menu-link-transform: uppercase;
@@ -1458,8 +1461,8 @@ $include-html-global-classes: $include-html-classes;
 // $topbar-menu-link-weight: $font-weight-bold;
 // $topbar-menu-link-color: $white;
 // $topbar-menu-icon-color: $white;
-// $topbar-menu-link-color-toggled: $jumbo;
-// $topbar-menu-icon-color-toggled: $jumbo;
+$topbar-menu-link-color-toggled: $customized-color-ocean-blue-hover;
+$topbar-menu-icon-color-toggled: $customized-color-ocean-blue-hover;
 // $topbar-menu-icon-position: $opposite-direction; // Change to $default-float for a left menu icon
 
 // Transitions and breakpoint styles

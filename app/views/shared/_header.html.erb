@@ -1,8 +1,12 @@
    
 <nav class="top-bar" data-topbar role="navigation">
   <ul class="title-area">
-    <li class="name">
-      <h1><%= link_to 'Mindful Life', articles_path%></h1>
+    <li class="name">      
+      <%if @current_user != nil && @current_user.user_type == "admin" %>
+        <h1><%= link_to 'Mindful Life', welcome_admin_path%></h1>
+      <%else%>
+        <h1><%= link_to 'Mindful Life', recipe_blog_path%></h1>
+      <%end%>
     </li>
      <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
     <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
@@ -13,17 +17,17 @@
     <!-- Left Nav Section -->
     <ul class="left">
       <%if @current_user != nil && @current_user.user_type == "admin" %>
-        <li><%= link_to 'ADMIN', articles_path%></li>
+        <li><%= link_to 'ADMIN', welcome_admin_path%></li>
       <%end%>
-      <li><%= link_to 'RECEITAS', article_blog_path%></li>
-      <li><%= link_to 'PROPRIEDADES DOS ALIMENTOS', article_blog_path%></li>
+      <li><%= link_to 'RECEITAS', recipe_blog_path%></li>
+      <!--li><%= link_to 'PROPRIEDADES DOS ALIMENTOS', article_blog_path%></li>
       <li><%= link_to 'BLOG', article_blog_path%></li>
-      <li><a href="#">SOBRE</a></li>
+      <li><a href="#">SOBRE</a></li-->
     </ul>
 
     <!-- Right Nav Section -->
     <ul class="right">
-      <li class="has-form">
+      <!--li class="has-form">
         <div class="row collapse">
           <div class="large-8 small-9 columns">
             <input type="text" placeholder="Encontre coisas!">
@@ -32,7 +36,7 @@
             <a href="#" class="small button expand" style="color:#FFFFFF;">Buscar</a>
           </div>
         </div>
-      </li>
+      </li-->
       <% if @current_user != nil %>
         <% if @current_user.person != nil && @current_user.person.diets != nil %>
           <li><%= link_to 'MINHA DIETA PESONALIZADA', edit_diet_path(@current_user.person.diets.first)%></li>

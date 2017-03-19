@@ -3,6 +3,12 @@ Rails.application.routes.draw do
   resources :people
   resources :diets
   resources :foods
+  resources :articles do
+    resources :comments
+  end
+  resources :recipes do
+    resources :comments
+  end 
   get 'food/select_unselect/:id_food/:id_person' => 'foods#select_unselect', :as => :select_unselect_food
   get 'food/select/:id_food/:id_person' => 'foods#select', :as => :select_food
   get 'food/unselect/:id_food/:id_person' => 'foods#unselect', :as => :unselect_food
@@ -23,7 +29,13 @@ Rails.application.routes.draw do
   post 'person/add_chronic_disease/:id_person' => 'people#add_chronic_disease', :as => :add_chronic_disease_person
   get 'diet/list_chronic_disease/:id_person' => 'diets#list_chronic_disease', :as => :list_chronic_disease_diet
   get 'article/blog' => 'articles#blog', :as => :article_blog
+  get 'recipe/blog' => 'recipes#blog', :as => :recipe_blog
+  get 'recipe/add_food_recipe/:id_recipe/:id_food' => 'recipes#add_food_recipe', :as => :add_food_recipe
+  get 'recipe/remove_portion_recipe/:id_recipe/:id_portion' => 'recipes#remove_portion_recipe', :as => :remove_portion_recipe
+  put 'recipe/update_portion/:id_recipe/:id_portion' => 'recipes#update_portion', :as => :update_portion_recipe
+ 
   get 'welcome/index'
+  get 'welcome/admin'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -79,7 +91,5 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-  resources :articles do
-    resources :comments
-  end
+
 end

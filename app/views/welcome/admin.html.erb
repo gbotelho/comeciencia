@@ -1,0 +1,20 @@
+  <div class="row large-centered column text-center">
+    <h2 class="subheader">WEBSITE ADMIN</h2>
+  </div>
+
+<%if @current_user != nil && @current_user.user_type == "admin" %>
+
+<ul class="tabs" data-tab>
+  <li class="tab-title active"><a href="#panel1">Artigos</a></li>
+  <li class="tab-title"><a href="#panel2">Receitas</a></li>
+</ul>
+<div class="tabs-content">
+  <div class="content active" id="panel1">
+    <%= render 'articles/index' %>
+  </div>
+  <div class="content" id="panel2">
+    <%= render 'recipes/index' %>
+  </div>
+</div>
+
+<%end%>

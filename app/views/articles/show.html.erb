@@ -1,7 +1,7 @@
 <div class="row medium-8 large-7 large-centered columns">
   <div class="blog-post">
-    <div class="text-center">
-      <h3><%= @article.title %> </h3>
+    <div class="text-center title">
+      <h3><%= @article.title.upcase %> </h3>
     </div>
     <%= image_tag(@article.image.url(:extralarge) , class: 'media-object') %>
     <p><%= simple_format(@article.text) %></p>

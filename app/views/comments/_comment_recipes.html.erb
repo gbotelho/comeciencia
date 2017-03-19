@@ -1,0 +1,23 @@
+<div class="row medium-8 large-7 large-centered columns">
+  <div class="blog-post">
+    <div class="row" >
+      <div class="large-12 columns">
+        <h6>Comentário deixado por <%=comment_recipes.commenter%> em <%=comment_recipes.created_at != nil ? comment_recipes.created_at.strftime("%d-%m-%Y") : ""%> </h6>
+      </div>
+    </div>
+    <div class="row" >
+      <div class="large-12 columns">
+        <p><%=comment_recipes.body%></p>
+      </div>
+    </div>
+    <%if @current_user != nil && @current_user.user_type == "admin" %>
+	    <div class="row" >
+	      <div class="large-12 columns">
+	        <%= link_to 'Destroy Comment', [comment_recipes.recipe, comment_recipes],{class:"small button", style: "color:#FFFFFF;",
+	               method: :delete,
+	               data: { confirm: 'Are you sure?' }} %>
+	      </div>
+	    </div>
+	<%end%>
+  </div>
+</div>

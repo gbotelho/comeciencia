@@ -1,0 +1,76 @@
+<div class="row medium-8 large-7 large-centered columns">
+  <div class="blog-post">
+
+<div class="row collapse">
+  <div class="large-12 columns text-center">
+    <div class="panel panel-title" style="margin-bottom: 0px;">
+      <h3><%= @recipe.title.split.map(&:capitalize).join(' ') %></h3>
+    </div>
+    <%= image_tag(@recipe.image.url(:extralarge) , class: 'media-object') %> 
+  </div>
+</div>
+<div class="row">
+  <div class="large-12 columns">
+    
+    <div class="panel panel-content">
+    <div class="row collapse">
+      <div class="large-6 small-12 columns">
+        
+          <h5><strong>Ingredientes</strong><hr width="90%"/></h5>
+          <h6 class="subheader">
+            <% @recipe.portions.each do |portion| %>
+              <%= portion.food.size.ceil.to_s + " " + portion.food.unit + " " + portion.food.name %>
+              <br/>
+            <% end %>
+          </h6>
+        </div>
+      <div class="large-6 small-12 columns">
+          <h5><strong>Modo de Preparo<hr width="90%"/></strong></h5>
+          <h6 class="subheader"><%= simple_format(@recipe.description) %></h6>
+       </div> 
+      </div>
+      <div class="panel">
+        <h6><strong>Dicas</strong><hr/></h6>
+        <h5 class="subheader"><%= simple_format(@recipe.tips) %></h5>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="row" >
+      <div class="large-12 columns">
+        <%if @current_user != nil && @current_user.user_type == "admin" %>
+          <%= link_to 'Editar', edit_recipe_path(@recipe), {class:"small button", style: "color:#FFFFFF;"} %>
+          <%= link_to 'Deletar', recipe_path(@recipe),{class:"small button", style: "color:#FFFFFF;", method: :delete,
+          data: { confirm: 'Tem certeza que deseja exlcuir esse artigo?'}} %>
+          <%= link_to "Voltar", recipes_path, {class:"small button", style: "color:#FFFFFF;"} %>
+        <%end%>
+      </div>
+    </div>
+	<div class="row" >
+		<div class="large-12 columns">
+		  <p><a href="#">Escrito em <%= @recipe.created_at.strftime("%d-%m-%Y")%> por Gabriela Botelho</a></p>
+		</div>
+	</div>
+	<div class="row" >
+      <div class="large-12 columns">
+      <h5>DEIXE SEU COMENTÁRIO</h5>
+      <div class="panel">
+  		  <%= render 'comments/form_recipes' %>
+      </div>
+      </div>
+    </div>
+    <div class="row" >
+      <div class="large-12 columns">
+        <h5>COMENTÁRIOS</h5>
+        <% if @recipe.comments.count > 0 %>
+          <div class="panel">
+            <%= render partial: "comments/comment_recipes", collection: @recipe.comments.reject(&:new_record?) %>
+    			</div>
+    		<% else %>
+    			<p>Esse post ainda não foi comentado. Seja o primeiro!</p>
+    		<% end %>
+      </div>
+    </div>
+  </div>
+</div>

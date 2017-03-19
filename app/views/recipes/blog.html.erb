@@ -1,0 +1,46 @@
+<!-- <div class="callout large primary">
+  <div class="row large-centered column text-center">
+    <h1>Mindful Life</h1>
+    <h2 class="subheader">For a conscious and happy life.</h2>
+  </div>
+</div>
+ -->
+<!-- We can now combine rows and columns when there's only one column in that row -->
+<div class="row medium-8 large-7 large-centered columns">
+
+  <% @recipes.each do |recipe| %>
+  <div class="blog-post">
+    <div class="text-center title">
+      <h3><%= recipe.title.upcase %> </h3>
+    </div>    
+    <%= image_tag(recipe.image.url(:extralarge) , class: 'media-object') %>
+    <p><%= simple_format(recipe.description.truncate_words(1, separator: '</p>')) %></p>
+    <div class="row" >
+      <div class="large-12 columns">
+        <%= link_to 'Ler mais', recipe_path(recipe), {class:"small button", style: "color:#FFFFFF;"} %>
+        <%if @current_user != nil && @current_user.user_type == "admin" %>
+          <%= link_to 'Editar', edit_recipe_path(recipe), {class:"small button", style: "color:#FFFFFF;"} %>
+          <%= link_to 'Deletar', recipe_path(recipe),{class:"small button", style: "color:#FFFFFF;", method: :delete,
+          data: { confirm: 'Tem certeza que deseja exlcuir esse artigo?'}} %>
+        <%end%>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="row" >
+        <div class="large-12 columns">
+          <a href="#">Escrito em <%= recipe.created_at.strftime("%d-%m-%Y")%> por Gabriela Botelho</a>
+        </div>
+      </div>
+      <div class="row" >
+        <div class="large-12 columns">
+          <%= link_to "#{recipe.comments.count} Comentários", recipe_path(recipe, anchor: "comments")%>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
+    
+
+
+

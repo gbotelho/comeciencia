@@ -362,3 +362,14 @@ volumetrics_diet.meals.push(createMeal("Cafe da Manha", [morango, leite_desnatad
 volumetrics_diet.meals.push(createMeal("Almoco", [alface, frango, arroz_integral, feijao_preto]))
 volumetrics_diet.meals.push(createMeal("Lanche", [iogurte_desnatado, maca, cookies_de_aveia]))
 volumetrics_diet.meals.push(createMeal("Jantar", [macarrao_integral, cenoura, atum]))
+
+recipe_bolo_de_cenoura = Recipe.create(title: "Bolo de Cenoura - Farinha de Aveia")
+
+portion_cenoura = Portion.create(food: cenoura, size: 100)
+portion_ovo = Portion.create(food: ovo, size: 100)
+
+recipe_bolo_de_cenoura.portions.push(portion_cenoura)
+recipe_bolo_de_cenoura.portions.push(portion_ovo)
+recipe_bolo_de_cenoura.description = "1. Coloque no liquidificador.<br>2. Bate tudo.<br>3. Põe na forma."
+recipe_bolo_de_cenoura.tips = "Use cenoura orgânica."
+recipe_bolo_de_cenoura.save

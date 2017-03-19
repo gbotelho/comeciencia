@@ -67,7 +67,7 @@ class UsersController < ApplicationController
       # flash[:notice] = "You've been logged in."
       session[:user_id] = @user.id
       if @user.user_type != nil && @user.user_type = "admin"
-        redirect_to articles_path
+        redirect_to welcome_admin_path
       else
         redirect_to edit_diet_path(@user.person.diets.first)
       end

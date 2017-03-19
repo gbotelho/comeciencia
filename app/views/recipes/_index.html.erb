@@ -1,0 +1,45 @@
+  <div class="row large-centered column text-center">
+    <%= link_to 'CRIAR NOVA RECEITA', new_recipe_path, {class:"small button", style: "color:#FFFFFF;"} %>
+    <hr>
+  </div>
+
+<div class="row medium-8 large-7 large-centered columns">
+
+  <% Recipe.all.each do |recipe| %>
+  <div class="blog-post">
+    <div class="row" >
+      <div class="large-3 columns">
+        <%= image_tag(recipe.image.url(:medium), class: 'media-object') %>
+      </div>
+      <div class="large-8 columns">
+        <h3><%= recipe.title.upcase %> </h3>
+        <p><%= recipe.description %></p>
+      </div>
+      <div class="large-1 columns">
+        <%= link_to 'Ler mais', recipe_path(recipe), {class:"small button", style: "color:#FFFFFF;"} %>
+        <%if @current_user != nil && @current_user.user_type == "admin" %>
+          <%= link_to 'Editar', edit_recipe_path(recipe), {class:"small button", style: "color:#FFFFFF;"} %>
+          <%= link_to 'Deletar', recipe_path(recipe),{class:"small button", style: "color:#FFFFFF;", method: :delete,
+          data: { confirm: 'Tem certeza que deseja excluir essa receita?'}} %>
+        <%end%>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="row" >
+        <div class="large-12 columns">
+          <a href="#">Escrito em <%= recipe.created_at.strftime("%d-%m-%Y")%> por Gabriela Botelho</a>
+        </div>
+      </div>
+      <div class="row" >
+        <div class="large-12 columns">
+          <a href="#"><%= recipe.comments.count %> Comentários</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
+    
+
+
+

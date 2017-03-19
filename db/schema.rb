@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160918182742) do
+ActiveRecord::Schema.define(version: 20161213005742) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,11 +32,13 @@ ActiveRecord::Schema.define(version: 20160918182742) do
     t.string   "commenter"
     t.text     "body"
     t.integer  "article_id"
+    t.integer  "recipe_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   add_index "comments", ["article_id"], name: "index_comments_on_article_id", using: :btree
+  add_index "comments", ["recipe_id"], name: "index_comments_on_recipe_id", using: :btree
 
   create_table "diets", force: :cascade do |t|
     t.integer  "person_id"
@@ -138,11 +140,30 @@ ActiveRecord::Schema.define(version: 20160918182742) do
   create_table "portions", force: :cascade do |t|
     t.integer  "food_id"
     t.float    "size"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   add_index "portions", ["food_id"], name: "index_portions_on_food_id", using: :btree
+
+  create_table "portions_recipes", id: false, force: :cascade do |t|
+    t.integer "recipe_id",  null: false
+    t.integer "portion_id", null: false
+  end
+
+  create_table "recipes", force: :cascade do |t|
+    t.string   "title"
+    t.string   "description"
+    t.string   "author"
+    t.string   "tips"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+  end
 
   create_table "users", force: :cascade do |t|
     t.integer  "person_id"
@@ -157,4 +178,5 @@ ActiveRecord::Schema.define(version: 20160918182742) do
   add_index "users", ["person_id"], name: "index_users_on_person_id", using: :btree
 
   add_foreign_key "comments", "articles"
+  add_foreign_key "comments", "recipes"
 end

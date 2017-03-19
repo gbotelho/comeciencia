@@ -1,0 +1,137 @@
+<%= form_for @recipe do |f| %>
+ 
+  <% if @recipe.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@recipe.errors.count, "error") %> prohibited
+        this recipe from being saved:
+      </h2>
+      <ul>
+        <% @recipe.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+ 
+   <div class="row">
+    <div class="large-12 columns">
+      <div class="row collapse">
+        <%= f.label :title, "NOME DA RECEITA" %>
+        <div class="small-12 columns">
+          <%= f.text_field :title , placeholder: "Bolo de Aveia", required: true  %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+   <div class="row">
+    <div class="large-12 columns">
+      <div class="row collapse">
+        <%= f.label :image, "IMAGEM DA RECEITA" %>
+        <div class="small-12 columns">
+          <%= f.file_field :image, class: 'form-control'%>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+  <div class="large-12 columns">
+  <%= f.label :portions, "INGREDIENTES" %>
+      <div id="<%="div_recipe_" + @recipe.id.to_s%>" class="row">
+        <% @recipe.portions.each do |portion| %>
+          <div id="<%="div_portion_" + portion.id.to_s%>" class="large-3 small-6 columns">
+            <%= image_tag(portion.food.image.url,  border: 2) %>
+            <div class="panel">
+              <h6><strong><%= portion.food.name %></strong></h6>
+
+              <div id="<%="form_show_portion_" + portion.id.to_s%>">
+                <h6 id="<%="form_show_portion_" + portion.id.to_s + "_h6"%>" class="subheader database-value"><%= number_with_precision(portion.size, precision: 0) %> <%= portion.food.unit %> - <%= number_with_precision((portion.size * (portion.food.calories / portion.food.size)), precision: 0) %> cal</h6>
+              </div>
+
+              <div id="<%="form_edit_portion_" + portion.id.to_s%>" class="hidden">
+                <%= form_for portion, url: update_portion_recipe_path(@recipe, portion), method: :put, remote: true do |f| %>
+                          <%= f.label :size, "Tamanho da porcao em " + portion.food.unit  %>
+                          <div class="row uncollapse">
+                        <div class="medium-6 columns">
+                          <%= f.text_field :size%>
+                        </div>
+                        <div class="medium-6 columns">
+                          <button class="tiny button" name="submit" value="submit" type="submit">Salvar</button>
+                        </div>
+                      </div>
+                <% end %>
+              </div>
+
+              <div class="row uncollapse">
+                    <div class="medium-6 columns">
+                      <a href="#" class="tiny button" style="color:#FFFFFF;" onclick="showHideDiv('<%="form_edit_portion_" + portion.id.to_s%>');showHideDiv('<%="form_show_portion_" + portion.id.to_s%>');return false;">Editar Porcao</a>
+                    </div>
+                    <div class="medium-6 columns">
+                      <h6><%= link_to 'Remover', remove_portion_recipe_path(@recipe, portion),  {class:"tiny button", style: "color:#FFFFFF;", remote: true } %></h6>
+                    </div>
+                </div>  
+
+            </div>
+          </div>
+        <% end %>
+        <div id="<%="div_add_food_recipe_" + @recipe.id.to_s%>" class="large-3 small-6 columns end">
+          <a href="#" data-reveal-id=<%= @recipe.title.gsub(/\s+/, "") %>><img src="<%= asset_path('Adicionar.png')%>"></a>
+        </div>
+      </div>
+  </div>
+</div>
+
+<div id=<%= @recipe.title.gsub(/\s+/, "") %> class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+    <div class="small-12 columns">
+      <div class="small-10 columns text-center">
+          <h3 id="modalTitle">Adicione um ingrediente a sua receita</h3>
+        </div>
+        <div class="small-2 columns">
+          <a class="close-reveal-modal" aria-label="Close">&#215;</a> 
+        </div>
+      <% @foods.each do |food| %>
+        <div class="large-3 small-6 columns">
+            <%= link_to image_tag(food.image.url,  border: 1), add_food_recipe_path(@recipe, food), remote: true %>
+            <div class="panel">
+            <h7><strong><%= food.name %></strong></h7>
+          </div>
+        </div>
+        <%end%>
+    </div>
+</div>
+
+   <div class="row">
+    <div class="large-12 columns">
+      <div class="row collapse">
+        <%= f.label :description, "MODO DE PREPARO DA RECEITA" %>
+        <div class="small-12 columns">
+          <%= f.text_area :description, class: "tinymce", placeholder: "1. Coloque no liquidificador.<br />2. Bate tudo.<br />3. P&otilde;e na forma.", cols: 20, rows: 20  %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <div class="clearfix">
+          <button class="small button right" name="submit" value="submit" type="submit">PUBLICAR</button>
+      </div>
+    </div>
+  </div>
+ 
+<% end %>
+
+<%= tinymce force_p_newline: false, force_br_newlines: false, forced_root_block: false, convert_newlines_to_brs: false, remove_linebreaks: true%>
+
+<script type="text/javascript">
+  tinyMCE.init({
+    force_p_newlines : false,
+    force_br_newlines : false,
+    forced_root_block : false,
+    convert_newlines_to_brs: false,
+    // Not to add br elements.
+    remove_linebreaks : true, 
+  });
+</script>

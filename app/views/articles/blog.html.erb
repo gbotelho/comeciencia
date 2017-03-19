@@ -1,16 +1,18 @@
-<div class="callout large primary">
+<!-- <div class="callout large primary">
   <div class="row large-centered column text-center">
     <h1>Mindful Life</h1>
     <h2 class="subheader">For a conscious and happy life.</h2>
   </div>
 </div>
-
+ -->
 <!-- We can now combine rows and columns when there's only one column in that row -->
 <div class="row medium-8 large-7 large-centered columns">
 
   <% @articles.each do |article| %>
   <div class="blog-post">
-    <h3><%= article.title %> </h3>
+    <div class="text-center title">
+      <h3><%= article.title.upcase %> </h3>
+    </div>
     <%= image_tag(article.image.url(:extralarge) , class: 'media-object') %>
     <p><%= simple_format(article.text.truncate_words(1, separator: '</p>')) %></p>
     <div class="row" >
