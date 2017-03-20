@@ -19,14 +19,14 @@
           <h5><strong>Ingredientes</strong><hr width="90%"/></h5>
           <h6 class="subheader">
             <% @recipe.portions.each do |portion| %>
-              <%= portion.food.size.ceil.to_s + " " + portion.food.unit + " " + portion.food.name %>
+              <%= portion.size.ceil.to_s + " " + portion.food.unit + " de " + portion.food.name %>
               <br/>
             <% end %>
           </h6>
         </div>
       <div class="large-6 small-12 columns">
           <h5><strong>Modo de Preparo<hr width="90%"/></strong></h5>
-          <h6 class="subheader"><%= simple_format(@recipe.description) %></h6>
+          <h6 class="subheader"><%= simple_format(@recipe.directions) %></h6>
        </div> 
       </div>
       <div class="panel">

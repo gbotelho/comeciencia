@@ -68,6 +68,11 @@ cenoura = Food.create(name: "cenoura", calories: 41,
 	breakfast: false, lunch: true, dinner: true, snack: false, 
 	high_carbohydrate: true, high_protein: false, high_fat: false,
 	image: File.new("#{Rails.root}/app/assets/images/cenoura.jpg"))
+mel = Food.create(name: "mel", calories: 128,
+	carbohydrate: 34.6, protein: 0.1, fat: 0, size: 2, unit: "colher(es) de sopa",
+	breakfast: true, lunch: false, dinner: false, snack: true, 
+	high_carbohydrate: true, high_protein: false, high_fat: false,
+	image: File.new("#{Rails.root}/app/assets/images/mel.jpg"))
 
 vinho = Food.create(name: "vinho", calories: 83,
 	carbohydrate: 2.7, protein: 0.1, fat: 0, size: 100, unit: "g",
@@ -111,6 +116,17 @@ atum = Food.create(name: "atum", calories: 54,
 	high_carbohydrate: false, high_protein: true, high_fat: false,
 	image: File.new("#{Rails.root}/app/assets/images/atum.jpg"))
 
+
+oleo_de_coco = Food.create(name: "óleo de coco", calories: 110,
+	carbohydrate: 0, protein: 0, fat: 12, size: 1, unit: "colher(es) de sopa",
+	breakfast: false, lunch: false, dinner: false, snack: false, 
+	high_carbohydrate: false, high_protein: false, high_fat: true,
+	image: File.new("#{Rails.root}/app/assets/images/oleo-de-coco.jpg"))
+amendoim = Food.create(name: "amendoim", calories: 567,
+	carbohydrate: 16, protein: 26, fat: 49, size: 100, unit: "g",
+	breakfast: false, lunch: false, dinner: false, snack: true, 
+	high_carbohydrate: false, high_protein: true, high_fat: true,
+	image: File.new("#{Rails.root}/app/assets/images/amendoim.jpg"))
 castanhas_de_caju = Food.create(name: "castanhas de caju", calories: 90,
 	carbohydrate: 2.9, protein: 3.3, fat: 7.3, size: 15, unit: "g",
 	breakfast: true, lunch: false, dinner: false, snack: true, 
@@ -131,6 +147,13 @@ semente_de_girassol = Food.create(name: "semente de girassol", calories: 570,
 	breakfast: false, lunch: true, dinner: true, snack: false, 
 	high_carbohydrate: false, high_protein: true, high_fat: true,
 	image: File.new("#{Rails.root}/app/assets/images/semente-de-girassol.jpg"))
+
+sal_rosa_do_himalaia = Food.create(name: "sal rosa do himalaia", calories: 0,
+	carbohydrate: 0, protein: 0, fat: 0, size: 1, unit: "pitada",
+	breakfast: false, lunch: false, dinner: false, snack: false, 
+	high_carbohydrate: false, high_protein: false, high_fat: false,
+	image: File.new("#{Rails.root}/app/assets/images/sal-rosa-do-himalaia.jpg"))
+
 
 frutas = [maca, pera, morango]
 frutas_vermelhas = [morango]
@@ -363,13 +386,30 @@ volumetrics_diet.meals.push(createMeal("Almoco", [alface, frango, arroz_integral
 volumetrics_diet.meals.push(createMeal("Lanche", [iogurte_desnatado, maca, cookies_de_aveia]))
 volumetrics_diet.meals.push(createMeal("Jantar", [macarrao_integral, cenoura, atum]))
 
-recipe_bolo_de_cenoura = Recipe.create(title: "Bolo de Cenoura - Farinha de Aveia")
+# recipe_bolo_de_cenoura = Recipe.create(title: "Bolo de Cenoura - Farinha de Aveia")
 
-portion_cenoura = Portion.create(food: cenoura, size: 100)
-portion_ovo = Portion.create(food: ovo, size: 100)
+# portion_cenoura = Portion.create(food: cenoura, size: 100)
+# portion_ovo = Portion.create(food: ovo, size: 100)
 
-recipe_bolo_de_cenoura.portions.push(portion_cenoura)
-recipe_bolo_de_cenoura.portions.push(portion_ovo)
-recipe_bolo_de_cenoura.description = "1. Coloque no liquidificador.<br>2. Bate tudo.<br>3. Põe na forma."
-recipe_bolo_de_cenoura.tips = "Use cenoura orgânica."
-recipe_bolo_de_cenoura.save
+# recipe_bolo_de_cenoura.portions.push(portion_cenoura)
+# recipe_bolo_de_cenoura.portions.push(portion_ovo)
+# recipe_bolo_de_cenoura.description = "1. Coloque no liquidificador.<br>2. Bate tudo.<br>3. Põe na forma."
+# recipe_bolo_de_cenoura.tips = "Use cenoura orgânica."
+
+
+recipe_pasta_de_amendoim = Recipe.create(title: "Pasta de Amendoim",
+	image: File.new("#{Rails.root}/app/assets/images/recipes/pasta-de-amendoim-receita.png"))
+portion_amendoim = Portion.create(food: amendoim, size: 400)
+portion_oleo_de_coco = Portion.create(food: oleo_de_coco, size: 4)
+portion_mel = Portion.create(food: mel, size: 2)
+portion_sal_rosa_do_himalaia = Portion.create(food: sal_rosa_do_himalaia, size: 1)
+recipe_pasta_de_amendoim.portions.push(portion_amendoim)
+recipe_pasta_de_amendoim.portions.push(portion_oleo_de_coco)
+recipe_pasta_de_amendoim.portions.push(portion_mel)
+recipe_pasta_de_amendoim.portions.push(portion_sal_rosa_do_himalaia)
+recipe_pasta_de_amendoim.directions = "<strong>1.</strong> Esquente o amendoim no forno ou panela em fogo baixo por 15 min (só para esquentar, assim fica mais fácil de processar).<br><strong>2.</strong> Coloque o amendoim ainda quente em um processador, junto com os outros ingredientes.<br><strong>3.</strong> Triture até virar uma pasta. Pode demorar um pouco, mas tenha fé que dá certo!! Se for necessário alterne 2 minutos processando com 1 minuto parado para não queimar o processador."
+recipe_pasta_de_amendoim.description = "Aprenda a fazer sua própria pasta de amendoim com apenas 4 ingredientes!!"
+recipe_pasta_de_amendoim.tips = "Conserve fora da geladeira para não endurecer."
+recipe_pasta_de_amendoim.save
+
+

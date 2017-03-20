@@ -1,8 +1,9 @@
+<%if @current_user != nil && @current_user.user_type == "admin" %>
   <div class="row large-centered column text-center">
     <%= link_to 'CRIAR NOVA RECEITA', new_recipe_path, {class:"small button", style: "color:#FFFFFF;"} %>
     <hr>
   </div>
-
+<%end%>
 <div class="row medium-8 large-7 large-centered columns">
 
   <% Recipe.all.each do |recipe| %>
@@ -13,7 +14,7 @@
       </div>
       <div class="large-8 columns">
         <h3><%= recipe.title.upcase %> </h3>
-        <p><%= recipe.description %></p>
+        <h5><%= recipe.description %></h5>
       </div>
       <div class="large-1 columns">
         <%= link_to 'Ler mais', recipe_path(recipe), {class:"small button", style: "color:#FFFFFF;"} %>

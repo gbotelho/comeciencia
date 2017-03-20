@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   get 'diet/list_chronic_disease/:id_person' => 'diets#list_chronic_disease', :as => :list_chronic_disease_diet
   get 'article/blog' => 'articles#blog', :as => :article_blog
   get 'recipe/blog' => 'recipes#blog', :as => :recipe_blog
+  get 'recipe/index' => 'recipes#index', :as => :recipe_index
   get 'recipe/add_food_recipe/:id_recipe/:id_food' => 'recipes#add_food_recipe', :as => :add_food_recipe
   get 'recipe/remove_portion_recipe/:id_recipe/:id_portion' => 'recipes#remove_portion_recipe', :as => :remove_portion_recipe
   put 'recipe/update_portion/:id_recipe/:id_portion' => 'recipes#update_portion', :as => :update_portion_recipe

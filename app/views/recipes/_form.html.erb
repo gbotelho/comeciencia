@@ -77,13 +77,13 @@
           </div>
         <% end %>
         <div id="<%="div_add_food_recipe_" + @recipe.id.to_s%>" class="large-3 small-6 columns end">
-          <a href="#" data-reveal-id=<%= @recipe.title.gsub(/\s+/, "") %>><img src="<%= asset_path('Adicionar.png')%>"></a>
+          <a href="#" data-reveal-id=<%= @recipe.title ? @recipe.title.gsub(/\s+/, "") : "" %>><img src="<%= asset_path('Adicionar.png')%>"></a>
         </div>
       </div>
   </div>
 </div>
 
-<div id=<%= @recipe.title.gsub(/\s+/, "") %> class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+<div id=<%= @recipe.title ? @recipe.title.gsub(/\s+/, "") : "" %> class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
     <div class="small-12 columns">
       <div class="small-10 columns text-center">
           <h3 id="modalTitle">Adicione um ingrediente a sua receita</h3>
@@ -91,14 +91,19 @@
         <div class="small-2 columns">
           <a class="close-reveal-modal" aria-label="Close">&#215;</a> 
         </div>
-      <% @foods.each do |food| %>
+
+      <% 
+      if (@foods != nil)
+        @foods.each do |food| %>
         <div class="large-3 small-6 columns">
             <%= link_to image_tag(food.image.url,  border: 1), add_food_recipe_path(@recipe, food), remote: true %>
             <div class="panel">
             <h7><strong><%= food.name %></strong></h7>
           </div>
         </div>
-        <%end%>
+        <%
+        end
+      end%>
     </div>
 </div>
 
